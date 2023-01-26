@@ -1,0 +1,36 @@
+.MovieComponent-external {
+    display: flex;
+    /* width: 50%; */
+    max-width: 800px;
+    justify-content: center;
+    padding: 15px;
+    box-shadow: 0 9px 9px 0 rgb(0 0 0 / 9%), 0 23px 50px 0 rgb(0 0 0 / 34%);
+
+}
+
+.MovieComponent-internal {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: left;
+}
+
+.MovieComponent-external .MovieComponent-internal .movieC-bottom{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.MovieComponent-external .MovieComponent-internal .movieC-bottom .movieCBot-right {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+}
+
+.movieCBot-right .material-icons {
+    font-size: 34px;
+    text-shadow: 3px 2px 15px #1b1b1b;
+    color: white;
+}

@@ -1,0 +1,9 @@
+version: "1"
+services:
+  reactui:
+    build: ./front
+    container_name: reactui_c
+    ports:
+      - '3000:3000'
+    stdin_open: true
+    tty: true
