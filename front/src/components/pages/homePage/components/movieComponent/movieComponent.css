@@ -5,7 +5,8 @@
     justify-content: center;
     padding: 15px;
     box-shadow: 0 9px 9px 0 rgb(0 0 0 / 9%), 0 23px 50px 0 rgb(0 0 0 / 34%);
-
+    background-color: white;
+    color: black
 }
 
 .MovieComponent-internal {
@@ -26,11 +27,35 @@
 .MovieComponent-external .MovieComponent-internal .movieC-bottom .movieCBot-right {
     display: flex;
     flex-direction: row;
-    gap: 15px;
+    gap: 5px;
+}
+
+.MovieComponent-external .MovieComponent-internal .movieC-bottom .movieCBot-right .material-icons:hover {
+    cursor:pointer;
 }
 
 .movieCBot-right .material-icons {
     font-size: 34px;
     text-shadow: 3px 2px 15px #1b1b1b;
-    color: white;
+    color: rgb(255, 255, 255);
+    user-select: none;
 }
+
+.md-green {
+    color: rgb(6, 167, 28) !important;
+    text-shadow: 3px 2px 15px rgb(0, 255, 0) !important;
+
+}
+
+.md-red {
+    color: rgb(209, 1, 1) !important;
+    text-shadow: 3px 2px 15px rgb(255, 0, 0) !important;
+
+}
+
+.movieCBot-right-add{
+    margin-right: 20px;
+}
+.animate__animated.animate__bounceOut {
+    --animate-duration: 0.5s;
+  }

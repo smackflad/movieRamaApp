@@ -7,7 +7,7 @@ import HomePage from './components/pages/homePage/HomePage';
 function App() {
   return (
     <Router>
-        <div className='Body'>
+        <div className='Body test'>
           <Routes>
             <Route path="/" element={<HomePage />}>
 
