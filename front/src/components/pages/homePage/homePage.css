@@ -29,6 +29,6 @@
 
 }
 
-.homePage-external .homePage-posts * {
+.homePage-external .homePage-posts > * {
     margin-top: 10px;
 }

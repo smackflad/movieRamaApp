@@ -22,12 +22,16 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
 }
 
-.MovieComponent-external .MovieComponent-internal .movieC-bottom .movieCBot-right {
+.MovieComponent-external .MovieComponent-internal .movieC-bottom .movieCBot-right-top {
     display: flex;
     flex-direction: row;
     gap: 5px;
+    position: absolute;
+    top: -35px;
+    left: -20px;
 }
 
 .MovieComponent-external .MovieComponent-internal .movieC-bottom .movieCBot-right .material-icons:hover {
@@ -53,9 +57,7 @@
 
 }
 
-.movieCBot-right-add{
-    margin-right: 20px;
+.movieCBot-right-container{
+    display: flex;
+    position: relative;
 }
-.animate__animated.animate__bounceOut {
-    --animate-duration: 0.5s;
-  }
