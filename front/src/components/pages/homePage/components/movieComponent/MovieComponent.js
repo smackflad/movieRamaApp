@@ -31,8 +31,8 @@ const MovieComponent = ({id, title, desc, nOuser, dOpublic, nOlikes, nOHates}) =
                         <div className="movieCBot-right movieCBot-right-top"
                         >
                             <motion.span className="material-icons md-green" onClick={()=>{if(hasReaction === 1){setHasReaction(0);}else{setHasReaction(1)}setIsBool(false);}}
-                            initial={{ opacity: 0, scale: 0.5 }}
-                            animate={{ opacity: 1, scale: 1 }}
+                            initial={{ opacity: 0, scale: 0.5, y: 30, x: 30 }}
+                            animate={{ opacity: 1, scale: 1, y: 0, x: 0}}
                             whileHover={{ scale: 1.1 }}
                             transition={{
                                 type: "spring",
@@ -46,8 +46,8 @@ const MovieComponent = ({id, title, desc, nOuser, dOpublic, nOlikes, nOHates}) =
                                 mood
                             </motion.span>
                             <motion.span className="material-icons md-red" onClick={()=>{if(hasReaction === 2){setHasReaction(0);}else{setHasReaction(2)}setIsBool(false);}}
-                            initial={{ opacity: 0, scale: 0.5 }}
-                            animate={{ opacity: 1, scale: 1 }}
+                            initial={{ opacity: 0, scale: 0.5, y: 30, x: -30 }}
+                            animate={{ opacity: 1, scale: 1, y: 0, x: 0}}
                             whileHover={{ scale: 1.1 }}
                             transition={{
                                 type: "spring",
@@ -72,7 +72,7 @@ const MovieComponent = ({id, title, desc, nOuser, dOpublic, nOlikes, nOHates}) =
                         </motion.div>
                     }
                     {(hasReaction == 1) &&
-                        <motion.div className="movieCBot-right movieCBot-right-add" onMouseEnter={()=>{setIsBool(true);}}
+                        <motion.div className="movieCBot-right movieCBot-right-add" onMouseEnter={()=>{setIsBool(true);}} onClick={()=>{setHasReaction(0)}}
                         animate={{ rotate: 360 }}
                         >
                             <span className="material-icons md-green">
@@ -81,7 +81,7 @@ const MovieComponent = ({id, title, desc, nOuser, dOpublic, nOlikes, nOHates}) =
                         </motion.div>
                     }
                     {(hasReaction == 2) &&
-                        <motion.div className="movieCBot-right movieCBot-right-add" onMouseEnter={()=>{setIsBool(true);}}
+                        <motion.div className="movieCBot-right movieCBot-right-add" onMouseEnter={()=>{setIsBool(true);}} onClick={()=>{setHasReaction(0)}}
                         animate={{ rotate: 360 }}
                         >
                             <span className="material-icons md-red">
