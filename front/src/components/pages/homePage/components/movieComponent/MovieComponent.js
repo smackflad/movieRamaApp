@@ -10,8 +10,11 @@ const MovieComponent = ({id, title, desc, nOuser, dOpublic, nOlikes, nOHates}) =
   const [hasReaction, setHasReaction] = useState(0);
   const [isBool, setIsBool] = useState(false);
 
+
   return (
-    <div className="MovieComponent-external">
+    <div className="MovieComponent-external"
+    
+    >
         <div className="MovieComponent-internal">
             <div className="movieC-top">
                 <span>{title}</span>

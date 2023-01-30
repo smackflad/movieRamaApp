@@ -21,7 +21,7 @@
 }
 
 .homePage-external .homePage-posts{
-    /* display: flex; */
+    display: flex;
     align-items: center;
     flex-direction: column;
     overflow-y:scroll;
