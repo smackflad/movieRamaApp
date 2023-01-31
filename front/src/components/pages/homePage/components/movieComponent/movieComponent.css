@@ -30,14 +30,16 @@
     flex-direction: row;
     gap: 5px;
     position: absolute;
-    top: -35px;
-    left: -20px;
+    top: -55px;
+    left: -40px;
+    padding: 20px;
 }
 
 .MovieComponent-external .MovieComponent-internal .movieC-bottom .movieCBot-right-right .material-icons:hover,
 .movieCBot-right-right .movieCBot-right-container .material-icons:hover {
     cursor:pointer;
 }
+
 
 .movieCBot-right-right .material-icons, .movieCBot-right-right .movieCBot-right-container .material-icons {
     font-size: 34px;
@@ -69,4 +71,19 @@
     flex-direction: row;
     align-items: center;
     gap: 15px;
+}
+
+
+.movieCBot-right-bot-container{
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    border-radius: 25px;
+    background-color: white;
+    box-shadow: 0 9px 9px 0 rgb(0 0 0 / 9%), 0 23px 50px 0 rgb(0 0 0 / 34%);
+
+    position: absolute;
+    top: -10px;
+    right: 40px;
+    width: max-content;
 }

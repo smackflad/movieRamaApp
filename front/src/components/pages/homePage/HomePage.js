@@ -75,7 +75,9 @@ return (
         initial="hidden"
         animate="show"
     >
-        <motion.div variants={item}>
+        <motion.div variants={item} 
+        className="homePage-posts-container"
+        >
         <MovieComponent
             id={5}
             title={"The Empire Strikes Back"}
@@ -86,7 +88,9 @@ return (
             isLiked={0}
             />
         </motion.div>
-        <motion.div variants={item}>
+        <motion.div variants={item}
+        className="homePage-posts-container"
+        >
         <MovieComponent
             id={5}
             title={"The Empire Strikes Back"}
@@ -97,7 +101,9 @@ return (
             isLiked={1}
             />
         </motion.div>
-        <motion.div variants={item}>
+        <motion.div variants={item}
+        className="homePage-posts-container"
+        >
         <MovieComponent
             id={5}
             title={"The Empire Strikes Back"}
@@ -108,7 +114,9 @@ return (
             isLiked={2}
             />
         </motion.div>
-        <motion.div variants={item}>
+        <motion.div variants={item}
+        className="homePage-posts-container"
+        >
           <MovieComponent
             id={5}
             title={"The Empire Strikes Back"}

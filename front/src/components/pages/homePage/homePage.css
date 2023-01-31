@@ -32,3 +32,7 @@
 .homePage-external .homePage-posts > * {
     margin-top: 10px;
 }
+
+.homePage-posts-container{
+    /* z-index: -1; */
+}

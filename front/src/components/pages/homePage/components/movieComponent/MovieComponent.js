@@ -27,11 +27,7 @@ const MovieComponent = ({id, title, desc, nOuser, dOpublic, nOlikes, nOHates, is
                     <span>Posted by {nOuser}</span>
                 </div>
                 <div className="movieCBot-right">
-                    <div className="movieCBot-right-left">
-                        <span>{isLiked === 1 && "You and "} {nOlikes} liked it!</span>
-                        <span>{isLiked === 2 && "You and "} {nOHates} hated it!</span>
-                    </div>
-                    <div className="movieCBot-right-right" onMouseLeave={()=>{setIsBool(false);}}>
+                    <div className="movieCBot-right-right" onMouseLeave={()=>{setIsBool(false);}} onMouseEnter={()=>{setIsBool(true);}}>
                         {isBool && 
                             <div className="movieCBot-right-container movieCBot-right-top-container"
                             >
@@ -92,6 +88,12 @@ const MovieComponent = ({id, title, desc, nOuser, dOpublic, nOlikes, nOHates, is
                                 >
                                     sentiment_very_dissatisfied
                                 </motion.span>
+                        }
+                        {(isBool) &&
+                            <div className="movieCBot-right-bot-container">
+                                <span>{nOlikes} liked it!</span>
+                                <span>{nOHates} hated it!</span>
+                            </div>
                         }
                     </div>
                 </div>
