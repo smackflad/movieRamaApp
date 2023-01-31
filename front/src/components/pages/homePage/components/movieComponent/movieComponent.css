@@ -25,7 +25,7 @@
     align-items: center;
 }
 
-.MovieComponent-external .MovieComponent-internal .movieC-bottom .movieCBot-right-top {
+.MovieComponent-external .MovieComponent-internal .movieC-bottom .movieCBot-right-top-container {
     display: flex;
     flex-direction: row;
     gap: 5px;
@@ -34,11 +34,12 @@
     left: -20px;
 }
 
-.MovieComponent-external .MovieComponent-internal .movieC-bottom .movieCBot-right .material-icons:hover {
+.MovieComponent-external .MovieComponent-internal .movieC-bottom .movieCBot-right-right .material-icons:hover,
+.movieCBot-right-right .movieCBot-right-container .material-icons:hover {
     cursor:pointer;
 }
 
-.movieCBot-right .material-icons {
+.movieCBot-right-right .material-icons, .movieCBot-right-right .movieCBot-right-container .material-icons {
     font-size: 34px;
     text-shadow: 3px 2px 15px #1b1b1b;
     color: rgb(255, 255, 255);
@@ -57,7 +58,15 @@
 
 }
 
-.movieCBot-right-container{
+.movieCBot-right-right
+{
     display: flex;
     position: relative;
+}
+
+.movieCBot-right {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 15px;
 }

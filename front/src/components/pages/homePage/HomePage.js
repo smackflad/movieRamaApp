@@ -83,6 +83,7 @@ return (
             nOuser={"Smackflad"}
             nOlikes={5}
             nOHates={3}
+            isLiked={0}
             />
         </motion.div>
         <motion.div variants={item}>
@@ -93,6 +94,7 @@ return (
             nOuser={"Smackflad"}
             nOlikes={5}
             nOHates={3}
+            isLiked={1}
             />
         </motion.div>
         <motion.div variants={item}>
@@ -103,6 +105,7 @@ return (
             nOuser={"Smackflad"}
             nOlikes={5}
             nOHates={3}
+            isLiked={2}
             />
         </motion.div>
         <motion.div variants={item}>
@@ -113,6 +116,7 @@ return (
             nOuser={"Smackflad"}
             nOlikes={5}
             nOHates={3}
+            isLiked={0}
             />
         </motion.div>
     </motion.div>
