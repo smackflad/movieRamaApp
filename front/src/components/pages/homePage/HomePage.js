@@ -1,6 +1,7 @@
 import "./homePage.css";
 import mainLogo from "./../../../imgs/logoc.png";
 import MovieComponent from "./components/movieComponent/MovieComponent";
+import NavBar from "./components/navBar/NavBar";
 
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -64,17 +65,18 @@ const item = {
 return (
   <div className="homePage-external">
     <motion.div className="homePage-logo"
-        initial={{ scale: 1 }}
-        animate={animationControls}
+      initial={{ scale: 1 }}
+      animate={animationControls}
     >
       <img src={mainLogo} />
     </motion.div>
     <motion.div
       className="homePage-posts"
-        variants={container}
-        initial="hidden"
-        animate="show"
+      variants={container}
+      initial="hidden"
+      animate="show"
     >
+        <NavBar />
         <motion.div variants={item} 
         className="homePage-posts-container"
         >

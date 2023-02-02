@@ -9,6 +9,7 @@ const MovieComponent = ({id, title, desc, nOuser, dOpublic, nOlikes, nOHates, is
   let navigate = useNavigate();
   const [hasReaction, setHasReaction] = useState(isLiked);
   const [isBool, setIsBool] = useState(false);
+  const [isDateShow, setIsDateShow] = useState(false);
 
 
   return (
@@ -25,6 +26,21 @@ const MovieComponent = ({id, title, desc, nOuser, dOpublic, nOlikes, nOHates, is
             <div className="movieC-bottom">
                 <div className="movieCBot-left">
                     <span>Posted by {nOuser}</span>
+                    <span className="movieCBot-left-days" 
+                    onMouseEnter={()=>{setIsDateShow(true)}}
+                    onMouseLeave={()=>{setIsDateShow(false)}}>
+                        2 days ago
+                    </span>
+                    {isDateShow &&
+                    <motion.div className="movieCBot-left-days-tooltip"
+                    initial={{opacity: 0}}
+                    animate={{opacity: 1}}
+                    transition={{
+                        duration: 0.4,
+                    }}>
+                        <span>29/1/2023, 18:00</span>
+                    </motion.div>
+                    }
                 </div>
                 <div className="movieCBot-right">
                     <div className="movieCBot-right-right" onMouseLeave={()=>{setIsBool(false);}} onMouseEnter={()=>{setIsBool(true);}}>
@@ -91,8 +107,8 @@ const MovieComponent = ({id, title, desc, nOuser, dOpublic, nOlikes, nOHates, is
                         }
                         {(isBool) &&
                             <div className="movieCBot-right-bot-container">
-                                <span>{nOlikes} liked it!</span>
-                                <span>{nOHates} hated it!</span>
+                                <span>{nOlikes} liked it</span>
+                                <span>{nOHates} hated it</span>
                             </div>
                         }
                     </div>

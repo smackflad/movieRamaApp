@@ -1,0 +1,31 @@
+.NavBar-external {
+    width: 80%;
+}
+
+.NavBar-external .NavBar-internal .NavBar-top .NavBar-top-left img {
+    max-width: 250px;
+    min-width: 200px;
+    height: auto;
+}
+
+.NavBar-external .NavBar-internal .NavBar-top .NavBar-top-left img:hover {
+    cursor: pointer;
+}
+.NavBar-external .NavBar-internal .NavBar-top {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.NavBar-external .NavBar-internal .NavBar-top .NavBar-top-right {
+    font-weight: bolder;
+    color: white;
+    font-size: 20px;
+    transition: opacity 0.2s ease-in-out;
+}
+
+.NavBar-external .NavBar-internal .NavBar-top .NavBar-top-right:hover {
+    opacity: 0.7;
+    cursor: pointer;
+}
