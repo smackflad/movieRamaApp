@@ -75,11 +75,8 @@ return (
       variants={container}
       initial="hidden"
       animate="show"
-    >
+      >
         <NavBar />
-        <motion.div variants={item} 
-        className="homePage-posts-container"
-        >
         <MovieComponent
             id={5}
             title={"The Empire Strikes Back"}
@@ -89,10 +86,6 @@ return (
             nOHates={3}
             isLiked={0}
             />
-        </motion.div>
-        <motion.div variants={item}
-        className="homePage-posts-container"
-        >
         <MovieComponent
             id={5}
             title={"The Empire Strikes Back"}
@@ -102,10 +95,6 @@ return (
             nOHates={3}
             isLiked={1}
             />
-        </motion.div>
-        <motion.div variants={item}
-        className="homePage-posts-container"
-        >
         <MovieComponent
             id={5}
             title={"The Empire Strikes Back"}
@@ -115,10 +104,6 @@ return (
             nOHates={3}
             isLiked={2}
             />
-        </motion.div>
-        <motion.div variants={item}
-        className="homePage-posts-container"
-        >
           <MovieComponent
             id={5}
             title={"The Empire Strikes Back"}
@@ -128,6 +113,19 @@ return (
             nOHates={3}
             isLiked={0}
             />
+        <motion.div className="Homepage-chevronBtn" variants={item}
+        whileTap={{scale:0.8}}
+        whileHover={{scale:1.1}}>
+          <button
+            className="chevronButton"
+            type="submit"
+            onClick={()=>{}}
+            >
+            <i className="material-icons chevron-item add">
+              {" "}
+              add{" "}
+            </i>
+          </button>
         </motion.div>
     </motion.div>
   </div>

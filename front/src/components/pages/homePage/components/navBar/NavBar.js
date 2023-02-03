@@ -1,5 +1,5 @@
 import "./navBar.css";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useAnimation, motion, delay, AnimatePresence } from "framer-motion";
@@ -9,7 +9,23 @@ import mainLogo from "../../../../../imgs/logoflat.png";
 
 const NavBar = ({}) => {
   let navigate = useNavigate();
-  const [dropdownIsOpen, setDropdownIsOpen] = useState(true);
+  const [dropdownIsOpen, setDropdownIsOpen] = useState(false);
+  
+  const refDropdown = useRef(null);
+  const refDropdownbtn = useRef(null);
+
+  useEffect(() =>{
+    document.addEventListener("click", handleClickOutside, true);
+  }, []);
+
+  const handleClickOutside = (e) =>{
+    if(refDropdownbtn.current && !refDropdownbtn.current.contains(e.target) && refDropdown.current && !refDropdown.current.contains(e.target)){
+        setDropdownIsOpen(false);
+    }
+  };
+
+
+
 
   return (
     <div className="NavBar-external">
@@ -30,16 +46,16 @@ const NavBar = ({}) => {
                 </div>
                 <div className="NavBar-bot-right">
                     <div className="NavBar-bot-right-dropdown">
-                        <div className="NavBar-bot-right-dropdown-btn" onClick={()=>{setDropdownIsOpen(!dropdownIsOpen)}}>
+                        <div ref={refDropdownbtn} className="NavBar-bot-right-dropdown-btn" onClick={()=>{setDropdownIsOpen(!dropdownIsOpen)}}>
                             <div className="NavBar-bot-right-dropdown-txt">
                                 Sort by: Date
                             </div>
-                            <span class="material-symbols-rounded">
+                            <span className="material-symbols-rounded">
                                 expand_more
                             </span>
                         </div>
                         {(dropdownIsOpen) &&
-                            <div className="NavBar-bot-right-dropdown-list">
+                            <div className="NavBar-bot-right-dropdown-list" ref={refDropdown}>
                                 <ul>
                                     <li>Date</li>
                                     <li>Likes</li>
