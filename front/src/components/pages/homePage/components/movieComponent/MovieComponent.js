@@ -54,11 +54,13 @@ const MovieComponent = ({id, title, desc, nOuser, dOpublic, nOlikes, nOHates, is
                     <div className="movieCBot-right">
                         <div className="movieCBot-right-left">
                             <div className="movieCBot-right-left-inner">
+                                <div className="movieCBot-right-left-center">    
+                                    <span>5</span>
+                                </div>
                                 <span className="material-icons md-green movieCBot-right-left-mood">
                                     mood
                                 </span>
                                 <div className="movieCBot-right-left-center">    
-                                    <span>5</span>
                                     <span>10</span>
                                 </div>
                                 <span className="material-icons md-red movieCBot-right-left-dissat">
