@@ -52,6 +52,20 @@ const MovieComponent = ({id, title, desc, nOuser, dOpublic, nOlikes, nOHates, is
                         </span>
                     </div>
                     <div className="movieCBot-right">
+                        <div className="movieCBot-right-left">
+                            <div className="movieCBot-right-left-inner">
+                                <span className="material-icons md-green movieCBot-right-left-mood">
+                                    mood
+                                </span>
+                                <div className="movieCBot-right-left-center">    
+                                    <span>5</span>
+                                    <span>10</span>
+                                </div>
+                                <span className="material-icons md-red movieCBot-right-left-dissat">
+                                    sentiment_very_dissatisfied
+                                </span>
+                            </div>
+                        </div>
                         <div className="movieCBot-right-right" onMouseLeave={()=>{setIsBool(false);}} onMouseEnter={()=>{setIsBool(true);}}>
                             {isBool && 
                                 <div className="movieCBot-right-container movieCBot-right-top-container"
@@ -114,12 +128,12 @@ const MovieComponent = ({id, title, desc, nOuser, dOpublic, nOlikes, nOHates, is
                                         sentiment_very_dissatisfied
                                     </motion.span>
                             }
-                            {(isBool) &&
+                            {/* {(isBool) &&
                                 <div className="movieCBot-right-bot-container">
                                     <span>{nOlikes} liked it</span>
                                     <span>{nOHates} hated it</span>
                                 </div>
-                            }
+                            } */}
                         </div>
                     </div>
 
