@@ -1,0 +1,13 @@
+.loginPage-external .loginPage-internal .loginPage-logo{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loginPage-external .loginPage-internal .loginPage-logo img {
+    /* max-width: 20%; */
+    max-width: 200px;
+    height: auto;
+}

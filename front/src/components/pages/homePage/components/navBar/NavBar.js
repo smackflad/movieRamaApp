@@ -35,7 +35,7 @@ const NavBar = ({}) => {
                     <img src={mainLogo} />
                 </div>
                 <div className="NavBar-top-right">
-                    <span>Log in</span>
+                    <span onClick={()=>{navigate('/login')}}>Log in</span>
                 </div>
             </div>
             <div className="NavBar-bot">
