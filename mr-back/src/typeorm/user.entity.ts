@@ -22,7 +22,7 @@ export class User {
 
   @Column({
     nullable: false,
-    unique: true,
+    // unique: true,
     default: '',
   })
   username: string;

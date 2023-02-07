@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from 'src/typeorm';
-import { CreateUserDto } from 'src/users/users.dtos';
+import { CreateUserDto, UserExistsDto } from 'src/users/users.dtos';
 import { Repository } from 'typeorm';
 
 @Injectable()
@@ -21,5 +21,10 @@ export class UsersService {
 
   findUsersById(id: number) {
     return this.userRepository.findOne({where: {id}});
+  }
+
+  async findUserExists(userExistsDto: UserExistsDto) {
+    const user = await this.userRepository.findOne({where: {email: userExistsDto.email}})
+    return user !== null;
   }
 }

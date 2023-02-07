@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Param, ParseIntPipe, Post, UsePipes, ValidationPipe } from '@nestjs/common';
 import { UsersService } from 'src/users/services/users/users.service';
-import { CreateUserDto } from 'src/users/users.dtos';
+import { CreateUserDto, UserExistsDto } from 'src/users/users.dtos';
 
 @Controller('users')
 export class UsersController {
@@ -20,5 +20,11 @@ export class UsersController {
   @UsePipes(ValidationPipe)
   createUsers(@Body() createUserDto: CreateUserDto) {
     return this.userService.createUser(createUserDto);
+  }
+
+  @Post('exists')
+  @UsePipes(ValidationPipe)
+  findUserExists(@Body() userExistsDto: UserExistsDto) {
+      return this.userService.findUserExists(userExistsDto);
   }
 }

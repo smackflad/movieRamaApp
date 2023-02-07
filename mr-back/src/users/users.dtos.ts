@@ -24,3 +24,9 @@ export class CreateUserDto {
     @IsEmail()
     email: string;
 }
+
+export class UserExistsDto {
+    @IsNotEmpty()
+    @IsString()
+    email: string;
+}
