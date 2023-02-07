@@ -1,10 +1,13 @@
-import { Body, Controller, Get, Param, ParseIntPipe, Post, UsePipes, ValidationPipe } from '@nestjs/common';
+import { UseGuards, Body, Controller, Get, Param, ParseIntPipe, Post, UsePipes, ValidationPipe, Request } from '@nestjs/common';
+import { AuthService } from 'src/users/services/users/auth.service';
 import { UsersService } from 'src/users/services/users/users.service';
 import { CreateUserDto, LoginUserDto, UserExistsDto } from 'src/users/users.dtos';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('users')
 export class UsersController {
-  constructor(private readonly userService: UsersService) {}
+  constructor(private readonly userService: UsersService,
+    private readonly authService: AuthService) {}
   
   @Get()
   getUsers() {
@@ -23,9 +26,14 @@ export class UsersController {
   }
 
   @Post('login')
-  @UsePipes(ValidationPipe)
-  loginUser(@Body() loginUserDto: LoginUserDto) {
-    return this.userService.loginUser(loginUserDto);
+  login(@Body() payload) {
+    return this.authService.signPayload(payload);
+  }
+  
+  @UseGuards(AuthGuard('jwt'))
+  @Post('validate')
+  validate(@Request() req) {
+    return req.user;
   }
 
   @Post('exists')

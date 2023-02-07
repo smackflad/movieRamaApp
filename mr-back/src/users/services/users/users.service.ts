@@ -32,4 +32,9 @@ export class UsersService {
     const user = await this.userRepository.findOne({where: {email: userExistsDto.email}})
     return user !== null;
   }
+
+  async findUserByEmail(email: string) {
+    const user = await this.userRepository.findOne({where: {email: email}})
+    return user;
+  }
 }
