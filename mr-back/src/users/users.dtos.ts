@@ -30,3 +30,13 @@ export class UserExistsDto {
     @IsString()
     email: string;
 }
+
+export class LoginUserDto {
+    @IsNotEmpty()
+    @IsString()
+    email: string;
+
+    @IsNotEmpty()
+    @IsString()
+    password: string;
+}

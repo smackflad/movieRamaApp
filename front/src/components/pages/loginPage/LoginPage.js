@@ -50,19 +50,20 @@ const LoginPage = () => {
 
   const handleLogin = async (e)=>{
     e.preventDefault();
-    console.log(e.target);
+    console.log(e.target.password.value);
     setIsLoading(true);
-    // await axios.post(`http://localhost:3001/users/exists`, {
-    //   email: email
-    // })
-    //   .then(res => {
-    //     if(res.data){
-    //       setIsLogin(true);
-    //     }else{
-    //       setIsRegister(true);
-    //     }
-    //     setIsLoading(false);
-    //   })
+    await axios.post(`http://localhost:3001/users/login`, {
+      email: email,
+      password: e.target.password.value
+    })
+      .then(res => {
+        // if(res.data){
+        //   setIsLogin(true);
+        // }else{
+        //   setIsRegister(true);
+        // }
+        setIsLoading(false);
+      })
   }
 
   const handleRegister = async (e)=>{
@@ -191,6 +192,8 @@ return (
               />
               <motion.input className="loginPage-inputs-txt" type="password" placeholder="Password" required
                 key="loginPassword"
+                id="password"
+                name="password"
                 initial={{ y: 100, opacity:0}}
                 animate={{ y: 0, opacity:1}}
                 transition={{
