@@ -1,3 +1,8 @@
+.customTextBox-external {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
 .customTextBox-external .customTextBox-txt {
     padding: 4px;
     margin: 0;
@@ -14,4 +19,12 @@
     box-shadow: 1px 10px 35px -1px rgb(182, 0, 0);
     -webkit-box-shadow: 1px 10px 35px -1px rgb(182, 0, 0);
     -moz-box-shadow: 1px 10px 35px -1px rgb(182, 0, 0);
+}
+
+.customTextBox-external .customTextBox-span{
+    position: absolute;
+    z-index: 1;
+    font-family: unset !important;
+    bottom: -22px;
+    text-shadow: 0.5px 0.5px 7px black;
 }

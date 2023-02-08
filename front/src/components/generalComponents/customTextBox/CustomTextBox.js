@@ -2,7 +2,7 @@ import "./customTextBox.css";
 import { useNavigate } from "react-router-dom";
 import { useAnimation, motion, delay, AnimatePresence } from "framer-motion";
 
-const CustomTextBox = ({keyy="", name="", disabled=false, isError=false, required=false, value, change=()=>{}, blur=()=>{}, placeholder="", type="text"}) => {
+const CustomTextBox = ({keyy="", name="", disabled=false, isError=false, errorMessage="", required=false, value, change=()=>{}, blur=()=>{}, placeholder="", type="text"}) => {
     return (
     <div className="customTextBox-external">
         <motion.input 
@@ -20,7 +20,9 @@ const CustomTextBox = ({keyy="", name="", disabled=false, isError=false, require
                 delay: 0.2
             }}
         />
-        <span></span>
+        {(isError) &&
+            <span className="customTextBox-span">*{errorMessage}</span>
+        }
     </div>
     );
 };

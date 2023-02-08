@@ -35,12 +35,15 @@
     font-style: italic;
 }
 
-.loginPage-external .loginPage-internal .loginPage-logo-low{
+.loginPage-external .loginPage-internal .loginPage-logo-container-low .loginPage-logo-low{
     font-size: 20px;
-    /* font-weight: 500; */
-    /* font-style: italic; */
-
 }
+
+.loginPage-external .loginPage-internal .loginPage-logo-container-low {
+    position: relative;
+    display: flex;
+}
+
 .loginPage-external .loginPage-internal .loginPage-logo .loginPage-logo-img {
     display: flex;
     flex-direction: column;

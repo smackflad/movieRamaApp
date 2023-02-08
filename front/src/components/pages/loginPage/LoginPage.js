@@ -140,12 +140,17 @@ return (
         )}
         </AnimatePresence>
       </div>
-      {(!(isLogin || isRegister) || isLogin) &&
-        <span className="loginPage-logo-low">Connect!</span>
-      }
-      {(isRegister) &&
-        <span className="loginPage-logo-low">Create a new account!</span>
-      }
+      <div className="loginPage-logo-container-low">
+        <span class="material-symbols-outlined">
+          arrow_back_ios_new
+        </span>
+        {(!(isLogin || isRegister) || isLogin) &&
+          <span className="loginPage-logo-low">Connect!</span>
+        }
+        {(isRegister) &&
+          <span className="loginPage-logo-low">Create a new account!</span>
+        }
+      </div>
       <div className="loginPage-other">
         <div className="loginPage-inputs">
           {!(isLogin || isRegister) &&
@@ -264,6 +269,7 @@ return (
               disabled={false}
               required={true}
               isError={regPasswdErr}
+              errorMessage="Passwords do not match"
               placeholder="Repeat Password"
               type="password"
               blur={(e)=>{
