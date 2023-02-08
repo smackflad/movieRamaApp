@@ -12,12 +12,19 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
 }
 
 .homePage-external .homePage-logo img {
     max-width: 20%;
     min-width: 280px;
     height: auto;
+}
+
+.homePage-external .homePage-logo .homePage-logo-loading {
+    min-width: 25px;
+    position: absolute;
+    bottom: 150px;
 }
 
 .homePage-external .homePage-posts{

@@ -2,13 +2,14 @@ import "./customTextBox.css";
 import { useNavigate } from "react-router-dom";
 import { useAnimation, motion, delay, AnimatePresence } from "framer-motion";
 
-const CustomTextBox = ({key="", name="", disabled=false, isError=false, required=false, value, change=()=>{}, blur=()=>{}, placeholder="", type="text"}) => {
+const CustomTextBox = ({keyy="", name="", disabled=false, isError=false, required=false, value, change=()=>{}, blur=()=>{}, placeholder="", type="text"}) => {
     return (
     <div className="customTextBox-external">
         <motion.input 
             className={`customTextBox-txt ${isError ? "customTextBox-error":""}` } 
             type={type} placeholder={placeholder} required={required}
-            key={key} id={name} name={name}
+            key={keyy}
+            id={name} name={name}
             disabled={disabled}
             value={value} onChange={change}
             onBlur={blur}

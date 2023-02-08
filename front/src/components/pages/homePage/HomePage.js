@@ -2,6 +2,7 @@ import "./homePage.css";
 import mainLogo from "./../../../imgs/logoc.png";
 import MovieComponent from "./components/movieComponent/MovieComponent";
 import NavBar from "./components/navBar/NavBar";
+import loading from "./../../../imgs/loading.svg";
 
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -9,9 +10,37 @@ import { useState } from "react";
 import 'animate.css';
 import { useAnimation, motion, delay } from "framer-motion";
 import { useInView } from "react-intersection-observer";
+import axios from 'axios';
 
 const HomePage = () => {
   let navigate = useNavigate();
+
+  // const accessToken = localStorage.getItem('accessToken');
+
+  
+  const [usr, setUsr] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
+  useEffect(()=>{
+    setIsLoading(true);
+    const token= localStorage.getItem('accessToken');
+    axios.defaults.headers.common = {'Authorization': `Bearer ${token}`}
+    axios.post(`http://localhost:3001/users/validate`)
+    .then(res => {
+      setUsr(res.data);
+      console.log(res.data);
+      setIsLoading(false);
+      sequence();
+    })
+    .catch(error =>{
+      localStorage.clear('accessToken');
+      setIsLoading(false);
+      sequence();
+    })
+  }, [])
+
+
+  
+  
   const animationControls = useAnimation();
   async function sequence() {
     await animationControls.start({ scale: 1.5, transition: {delay: 0.5} });
@@ -22,12 +51,25 @@ const HomePage = () => {
           display: "none"
         }
       });
-  }
-
-
+    }
+    
   useEffect(()=>{
-    sequence();
+    // sequence();
   });
+
+  if(isLoading){
+    return (<>
+    <div className="homePage-external">
+      <motion.div className="homePage-logo"
+        initial={{ scale: 1 }}
+        animate={animationControls}
+      >
+        <img src={mainLogo} />
+        <img className="homePage-logo-loading" src={loading} />
+      </motion.div>
+    </div>
+  </>)
+  }
 
   
   const container = {
@@ -76,7 +118,7 @@ return (
       initial="hidden"
       animate="show"
       >
-        <NavBar />
+        <NavBar usr={usr}/>
         <MovieComponent
             id={5}
             title={"The Empire Strikes Back"}

@@ -54,18 +54,19 @@ const LoginPage = () => {
 
   const handleLogin = async (e)=>{
     e.preventDefault();
-    console.log(e.target.password.value);
     setIsLoading(true);
     await axios.post(`http://localhost:3001/users/login`, {
       email: email,
       password: e.target.password.value
     })
       .then(res => {
-        // if(res.data){
-        //   setIsLogin(true);
-        // }else{
-        //   setIsRegister(true);
-        // }
+        // res.data.accessToken
+        localStorage.setItem("accessToken", res.data.accessToken);
+        setIsLoading(false);
+        navigate("/")
+      })
+      .catch(error =>{
+        // email or password dosent match
         setIsLoading(false);
       })
   }
@@ -150,7 +151,7 @@ return (
           {!(isLogin || isRegister) &&
             <form> {/* first step */}
               <CustomTextBox 
-                key="email"
+                keyy="email"
                 name="email"
                 disabled={emailDisabled}
                 required={true}
@@ -181,7 +182,7 @@ return (
           {(isLogin) &&
             <form onSubmit={handleLogin}> {/* login */}
               <CustomTextBox 
-                key="email"
+                keyy="email"
                 name="email"
                 disabled={emailDisabled}
                 required={true}
@@ -191,7 +192,7 @@ return (
                 value={email}
               />
               <CustomTextBox 
-                key="loginPassword"
+                keyy="loginPassword"
                 name="password"
                 disabled={false}
                 required={true}
@@ -221,7 +222,7 @@ return (
           {(isRegister) &&
             <form onSubmit={handleRegister}> {/* register */}
               <CustomTextBox 
-              key="email"
+              keyy="email"
               name="email"
               disabled={emailDisabled}
               required={true}
@@ -231,7 +232,7 @@ return (
               value={email}
               />
               <CustomTextBox 
-              key="fName"
+              keyy="fName"
               name="firstName"
               disabled={false}
               required={true}
@@ -239,7 +240,7 @@ return (
               placeholder="First Name"
               />
               <CustomTextBox 
-              key="lName"
+              keyy="lName"
               name="lastName"
               disabled={false}
               required={true}
@@ -247,7 +248,7 @@ return (
               placeholder="Last Name"
               />
               <CustomTextBox 
-              key="regPass"
+              keyy="regPass"
               name="password"
               disabled={false}
               required={true}
@@ -258,7 +259,7 @@ return (
               type="password"
               />
               <CustomTextBox 
-              key="regRepPass"
+              keyy="regRepPass"
               name="repPass"
               disabled={false}
               required={true}

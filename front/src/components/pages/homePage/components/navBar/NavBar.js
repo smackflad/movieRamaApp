@@ -3,18 +3,27 @@ import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useAnimation, motion, delay, AnimatePresence } from "framer-motion";
-
+import axios from "axios";
 import mainLogo from "../../../../../imgs/logoflat.png";
 
 
-const NavBar = ({}) => {
-  let navigate = useNavigate();
-  const [dropdownIsOpen, setDropdownIsOpen] = useState(false);
-  
-  const refDropdown = useRef(null);
-  const refDropdownbtn = useRef(null);
+const NavBar = ({usr}) => {
+const [loggedIn, setLoggedIn] = useState(false);
+const [firstName, setFirstName] = useState("");
+//   const [loggedIn, setLoggedIn] = useState(false);
 
+
+let navigate = useNavigate();
+const [dropdownIsOpen, setDropdownIsOpen] = useState(false);
+
+const refDropdown = useRef(null);
+  const refDropdownbtn = useRef(null);
+  
   useEffect(() =>{
+      if(usr.id){
+          setFirstName(usr.firstName);
+          setLoggedIn(true);
+      }
     document.addEventListener("click", handleClickOutside, true);
   }, []);
 
@@ -35,7 +44,12 @@ const NavBar = ({}) => {
                     <img src={mainLogo} />
                 </div>
                 <div className="NavBar-top-right">
-                    <span onClick={()=>{navigate('/login')}}>Log in</span>
+                    {!(loggedIn) ?(
+                        <span onClick={()=>{navigate('/login')}}>Log in</span>
+                    ):(
+                            <span>Welcome, {firstName}</span>
+                    )
+                    }
                 </div>
             </div>
             <div className="NavBar-bot">

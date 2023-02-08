@@ -3,6 +3,7 @@ import { AuthService } from 'src/users/services/users/auth.service';
 import { UsersService } from 'src/users/services/users/users.service';
 import { CreateUserDto, LoginUserDto, UserExistsDto } from 'src/users/users.dtos';
 import { AuthGuard } from '@nestjs/passport';
+import { SELF_DECLARED_DEPS_METADATA } from '@nestjs/common/constants';
 
 @Controller('users')
 export class UsersController {
