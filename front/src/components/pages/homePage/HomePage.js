@@ -175,6 +175,7 @@ return (
           nOlikes={5}
           nOHates={3}
           isLiked={0}
+          usr={usr}
           />
         <MovieComponent
           id={5}
@@ -184,6 +185,7 @@ return (
           nOlikes={5}
           nOHates={3}
           isLiked={1}
+          usr={usr}
           />
         <MovieComponent
           id={5}
@@ -193,6 +195,7 @@ return (
           nOlikes={5}
           nOHates={3}
           isLiked={2}
+          usr={usr}
           />
         <MovieComponent
           id={5}
@@ -202,6 +205,7 @@ return (
           nOlikes={5}
           nOHates={3}
           isLiked={0}
+          usr={usr}
         />
         {(loggedIn) &&
           <motion.div className="Homepage-chevronBtn" variants={item}

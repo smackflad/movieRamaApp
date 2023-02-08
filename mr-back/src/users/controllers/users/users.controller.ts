@@ -30,7 +30,7 @@ export class UsersController {
   login(@Body() payload) {
     return this.authService.signPayload(payload);
   }
-  
+
   @UseGuards(AuthGuard('jwt'))
   @Post('validate')
   validate(@Request() req) {
