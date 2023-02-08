@@ -9,6 +9,7 @@ import { useState } from "react";
 import { useAnimation, motion, delay, AnimatePresence } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import axios from 'axios';
+import CustomTextBox from "../../generalComponents/customTextBox/CustomTextBox";
 
 const LoginPage = () => {
   let navigate = useNavigate();
@@ -18,6 +19,9 @@ const LoginPage = () => {
 
   const [email, setEmail] = useState("");
   const [emailDisabled, setEmailDisabled] = useState(false);
+
+  const [regPasswd, setRegPasswd] = useState("");
+  const [regPasswdErr, setRegPasswdErr] = useState(false);
 
   const initLogo = {
     show: {
@@ -145,18 +149,15 @@ return (
         <div className="loginPage-inputs">
           {!(isLogin || isRegister) &&
             <form> {/* first step */}
-              <motion.input className="loginPage-inputs-txt" type="text" placeholder="Enter your email" required
-              key="email"
-              id="email"
-              name="email"
-              disabled={emailDisabled}
-              initial={{ y: 100, opacity:0}}
-              animate={{ y: 0, opacity:1}}
-              transition={{
-                delay: 0.2
-              }}
-              value={email}
-              onChange={(e)=>{setEmail(e.target.value)}}
+              <CustomTextBox 
+                key="email"
+                name="email"
+                disabled={emailDisabled}
+                required={true}
+                isError={false}
+                placeholder="Email"
+                change={(e)=>{setEmail(e.target.value)}}
+                value={email}
               />
               {!(isLoading) ?
                 (
@@ -179,28 +180,24 @@ return (
           }
           {(isLogin) &&
             <form onSubmit={handleLogin}> {/* login */}
-              <motion.input className="loginPage-inputs-txt" type="text" placeholder="Enter your email" required
-              key="email"
-              id="email"
-              name="email"
-              disabled={emailDisabled}
-              initial={{ y: 100, opacity:0}}
-              animate={{ y: 0, opacity:1}}
-              transition={{
-                delay: 0.2
-              }}
-              value={email}
-              onChange={(e)=>{setEmail(e.target.value)}}
+              <CustomTextBox 
+                key="email"
+                name="email"
+                disabled={emailDisabled}
+                required={true}
+                isError={false}
+                placeholder="Email"
+                change={(e)=>{setEmail(e.target.value)}}
+                value={email}
               />
-              <motion.input className="loginPage-inputs-txt" type="password" placeholder="Password" required
+              <CustomTextBox 
                 key="loginPassword"
-                id="password"
                 name="password"
-                initial={{ y: 100, opacity:0}}
-                animate={{ y: 0, opacity:1}}
-                transition={{
-                  delay: 0.2
-                }}
+                disabled={false}
+                required={true}
+                isError={false}
+                placeholder="Password"
+                type="password"
               />
               {!(isLoading) ?
                 (
@@ -223,58 +220,60 @@ return (
           }
           {(isRegister) &&
             <form onSubmit={handleRegister}> {/* register */}
-              <motion.input className="loginPage-inputs-txt" type="text" placeholder="Enter your email" required
-                key="email"
-                id="email"
-                name="email"
-                disabled={emailDisabled}
-                initial={{ y: 100, opacity:0}}
-                animate={{ y: 0, opacity:1}}
-                transition={{
-                  delay: 0.2
-                }}
-                value={email}
-                onChange={(e)=>{setEmail(e.target.value)}}
+              <CustomTextBox 
+              key="email"
+              name="email"
+              disabled={emailDisabled}
+              required={true}
+              isError={false}
+              placeholder="Email"
+              change={(e)=>{setEmail(e.target.value)}}
+              value={email}
               />
-              <motion.input className="loginPage-inputs-txt" type="text" placeholder="First Name" required
-                key="fName"
-                id="firstName"
-                name="firstName"
-                initial={{ y: 100, opacity:0}}
-                animate={{ y: 0, opacity:1}}
-                transition={{
-                  delay: 0.2
-                }}
+              <CustomTextBox 
+              key="fName"
+              name="firstName"
+              disabled={false}
+              required={true}
+              isError={false}
+              placeholder="First Name"
               />
-              <motion.input className="loginPage-inputs-txt" type="text" placeholder="Last Name" required
-                key="lName"
-                id="lastName"
-                name="lastName"
-                initial={{ y: 100, opacity:0}}
-                animate={{ y: 0, opacity:1}}
-                transition={{
-                  delay: 0.2
-                }}
+              <CustomTextBox 
+              key="lName"
+              name="lastName"
+              disabled={false}
+              required={true}
+              isError={false}
+              placeholder="Last Name"
               />
-              <motion.input className="loginPage-inputs-txt" type="password" placeholder="Password" required
-                key="regPass"
-                id="password"
-                name="password"
-                initial={{ y: 100, opacity:0}}
-                animate={{ y: 0, opacity:1}}
-                transition={{
-                  delay: 0.2
-                }}
+              <CustomTextBox 
+              key="regPass"
+              name="password"
+              disabled={false}
+              required={true}
+              isError={false}
+              value={regPasswd}
+              change={(e)=>{setRegPasswd(e.target.value)}}
+              placeholder="Password"
+              type="password"
               />
-              <motion.input className="loginPage-inputs-txt" type="password" placeholder="Repeat Password" required
-                key="regRepPass"
-                id="repPass"
-                name="repPass"
-                initial={{ y: 100, opacity:0}}
-                animate={{ y: 0, opacity:1}}
-                transition={{
-                  delay: 0.2
-                }}
+              <CustomTextBox 
+              key="regRepPass"
+              name="repPass"
+              disabled={false}
+              required={true}
+              isError={regPasswdErr}
+              placeholder="Repeat Password"
+              type="password"
+              blur={(e)=>{
+                  console.log(regPasswd);
+                  if(e.target.value !== regPasswd){
+                    setRegPasswdErr(true)
+                  }else{
+                    setRegPasswdErr(false)
+                  }
+                }
+              }
               />
               {!(isLoading) ?(
                 <>
@@ -294,9 +293,6 @@ return (
               }
             </form>
           }
-        </div>
-        <div className="loginPage-signup">
-
         </div>
       </div>
     </div>

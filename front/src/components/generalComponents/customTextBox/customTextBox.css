@@ -1,0 +1,17 @@
+.customTextBox-external .customTextBox-txt {
+    padding: 4px;
+    margin: 0;
+    outline: none;
+    border-style: none;
+    border-radius: 4px;
+    font-size: 18px;
+    box-shadow: 1px 10px 35px -1px rgba(0,0,0,1);
+    -webkit-box-shadow: 1px 10px 35px -1px rgba(0,0,0,1);
+    -moz-box-shadow: 1px 10px 35px -1px rgba(0,0,0,1);
+}
+
+.customTextBox-external .customTextBox-txt.customTextBox-error {
+    box-shadow: 1px 10px 35px -1px rgb(182, 0, 0);
+    -webkit-box-shadow: 1px 10px 35px -1px rgb(182, 0, 0);
+    -moz-box-shadow: 1px 10px 35px -1px rgb(182, 0, 0);
+}
