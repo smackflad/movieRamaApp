@@ -24,11 +24,11 @@
     bottom: 150px;
 }
 
-.NavBar-bot .NavBar-bot-right .NavBar-bot-right-dropdown {
+.homePage-NavBar-bot .homePage-NavBar-bot-right .homePage-NavBar-bot-right-dropdown {
     position: relative;
 }
 
-.NavBar-bot .NavBar-bot-right .NavBar-bot-right-dropdown .NavBar-bot-right-dropdown-btn {
+.homePage-NavBar-bot .homePage-NavBar-bot-right .homePage-NavBar-bot-right-dropdown .homePage-NavBar-bot-right-dropdown-btn {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -41,12 +41,12 @@
     border-radius: 5px;
     padding: 1px 2px 1px 10px;
 }
-.NavBar-bot .NavBar-bot-right .NavBar-bot-right-dropdown .NavBar-bot-right-dropdown-btn:hover {
+.homePage-NavBar-bot .homePage-NavBar-bot-right .homePage-NavBar-bot-right-dropdown .homePage-NavBar-bot-right-dropdown-btn:hover {
     cursor: pointer;
     user-select: none;
     opacity: 0.9;
 }
-.NavBar-bot {
+.homePage-NavBar-bot {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -54,19 +54,19 @@
 }
 
 @media only screen and (max-width: 900px) {
-    .NavBar-bot {
+    .homePage-NavBar-bot {
         width: 80%;
         min-width: unset;
     }
 }
 
-.NavBar-bot .NavBar-bot-left{
+.homePage-NavBar-bot .homePage-NavBar-bot-left{
     display: flex;
     flex-direction: row;
     gap: 5px;
 }
 
-.NavBar-bot .NavBar-bot-left button{
+.homePage-NavBar-bot .homePage-NavBar-bot-left button{
     border-radius: 25px;
     padding: 4px 10px;
     border: none;
@@ -76,12 +76,12 @@
     font-size: 14px;
 }
 
-.NavBar-bot .NavBar-bot-left button:hover{
+.homePage-NavBar-bot .homePage-NavBar-bot-left button:hover{
     cursor: pointer;
     opacity: 0.9;
 }
 
-.NavBar-bot .NavBar-bot-right .NavBar-bot-right-dropdown .NavBar-bot-right-dropdown-list{
+.homePage-NavBar-bot .homePage-NavBar-bot-right .homePage-NavBar-bot-right-dropdown .homePage-NavBar-bot-right-dropdown-list{
     position: absolute;
     background-color: white;
     top: 28px;
@@ -90,7 +90,7 @@
     /* min-width: 112px; */
 }
 
-.NavBar-bot .NavBar-bot-right .NavBar-bot-right-dropdown .NavBar-bot-right-dropdown-list ul{
+.homePage-NavBar-bot .homePage-NavBar-bot-right .homePage-NavBar-bot-right-dropdown .homePage-NavBar-bot-right-dropdown-list ul{
     margin: 0;
     padding: 0px;
     box-shadow: 0 9px 9px 0 rgb(0 0 0 / 9%), 0 23px 50px 0 rgb(0 0 0 / 34%);
@@ -101,18 +101,18 @@
     /* gap: 10px; */
 }
 
-.NavBar-bot .NavBar-bot-right .NavBar-bot-right-dropdown .NavBar-bot-right-dropdown-list ul li {
+.homePage-NavBar-bot .homePage-NavBar-bot-right .homePage-NavBar-bot-right-dropdown .homePage-NavBar-bot-right-dropdown-list ul li {
     padding: 5px 30px 5px 20px;
 }
 
-.NavBar-bot .NavBar-bot-right .NavBar-bot-right-dropdown .NavBar-bot-right-dropdown-list ul li:first-child {
+.homePage-NavBar-bot .homePage-NavBar-bot-right .homePage-NavBar-bot-right-dropdown .homePage-NavBar-bot-right-dropdown-list ul li:first-child {
     padding: 10px 30px 5px 20px;
 }
 
-.NavBar-bot .NavBar-bot-right .NavBar-bot-right-dropdown .NavBar-bot-right-dropdown-list ul li:last-child{
+.homePage-NavBar-bot .homePage-NavBar-bot-right .homePage-NavBar-bot-right-dropdown .homePage-NavBar-bot-right-dropdown-list ul li:last-child{
     padding: 5px 30px 10px 20px;
 }
-.NavBar-bot .NavBar-bot-right .NavBar-bot-right-dropdown .NavBar-bot-right-dropdown-list ul li:hover {
+.homePage-NavBar-bot .homePage-NavBar-bot-right .homePage-NavBar-bot-right-dropdown .homePage-NavBar-bot-right-dropdown-list ul li:hover {
     color: #727272;
     cursor: pointer;
 }

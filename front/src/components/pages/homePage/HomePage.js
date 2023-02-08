@@ -137,18 +137,18 @@ return (
       animate="show"
       >
         <NavBar usr={usr}/>
-        <div className="NavBar-bot">
-          <div className="NavBar-bot-left">
+        <div className="homePage-NavBar-bot">
+          <div className="homePage-NavBar-bot-left">
               <button>All Posts</button>
               <button>New Posts</button>
               {(loggedIn) &&
                   <button>My Posts</button>
               }
           </div>
-          <div className="NavBar-bot-right">
-              <div className="NavBar-bot-right-dropdown">
-                  <div ref={refDropdownbtn} className="NavBar-bot-right-dropdown-btn" onClick={()=>{setDropdownIsOpen(!dropdownIsOpen)}}>
-                      <div className="NavBar-bot-right-dropdown-txt">
+          <div className="homePage-NavBar-bot-right">
+              <div className="homePage-NavBar-bot-right-dropdown">
+                  <div ref={refDropdownbtn} className="homePage-NavBar-bot-right-dropdown-btn" onClick={()=>{setDropdownIsOpen(!dropdownIsOpen)}}>
+                      <div className="homePage-NavBar-bot-right-dropdown-txt">
                           Sort by: Date
                       </div>
                       <span className="material-symbols-rounded">
@@ -156,7 +156,7 @@ return (
                       </span>
                   </div>
                   {(dropdownIsOpen) &&
-                      <div className="NavBar-bot-right-dropdown-list" ref={refDropdown}>
+                      <div className="homePage-NavBar-bot-right-dropdown-list" ref={refDropdown}>
                           <ul>
                               <li>Date</li>
                               <li>Likes</li>
