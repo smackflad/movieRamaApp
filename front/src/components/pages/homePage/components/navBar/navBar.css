@@ -35,78 +35,49 @@
     transition: opacity 0.2s ease-in-out;
 }
 
-.NavBar-external .NavBar-internal .NavBar-top .NavBar-top-right:hover {
+.NavBar-external .NavBar-internal .NavBar-top .NavBar-top-right .NavBar-top-right-span:hover {
     opacity: 0.7;
     cursor: pointer;
 }
 
-.NavBar-external .NavBar-internal .NavBar-bot .NavBar-bot-right .NavBar-bot-right-dropdown {
+.NavBar-external .NavBar-internal .NavBar-top .NavBar-top-right .NavBar-top-right-dropdown{
+    display: flex;
+    flex-direction: column;
     position: relative;
 }
 
-.NavBar-external .NavBar-internal .NavBar-bot .NavBar-bot-right .NavBar-bot-right-dropdown .NavBar-bot-right-dropdown-btn {
+.NavBar-external .NavBar-internal .NavBar-top .NavBar-top-right .NavBar-top-right-dropdown .NavBar-top-right-dropdown-btn{
     display: flex;
     flex-direction: row;
     align-items: center;
-    min-width: 130px;
-    justify-content: space-between;
-    background-color: white;
-    color: #3b3b3b;
-    font-weight: 600;
-    font-size: 14px;
-    border-radius: 5px;
-    padding: 1px 2px 1px 10px;
-}
-.NavBar-external .NavBar-internal .NavBar-bot .NavBar-bot-right .NavBar-bot-right-dropdown .NavBar-bot-right-dropdown-btn:hover {
-    cursor: pointer;
-    user-select: none;
-    opacity: 0.9;
-}
-.NavBar-external .NavBar-internal .NavBar-bot {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    min-width: 800px;
-}
-
-@media only screen and (max-width: 900px) {
-    .NavBar-external .NavBar-internal .NavBar-bot {
-        width: 80%;
-        min-width: unset;
-    }
-}
-
-.NavBar-external .NavBar-internal .NavBar-bot .NavBar-bot-left{
-    display: flex;
-    flex-direction: row;
     gap: 5px;
 }
 
-.NavBar-external .NavBar-internal .NavBar-bot .NavBar-bot-left button{
-    border-radius: 25px;
-    padding: 4px 10px;
-    border: none;
-    background-color: white;
-    color: #3b3b3b;
-    font-weight: 600;
-    font-size: 14px;
-}
-
-.NavBar-external .NavBar-internal .NavBar-bot .NavBar-bot-left button:hover{
+.NavBar-external .NavBar-internal .NavBar-top .NavBar-top-right .NavBar-top-right-dropdown .NavBar-top-right-dropdown-btn:hover{
+    opacity: 0.7;
     cursor: pointer;
-    opacity: 0.9;
 }
 
-.NavBar-external .NavBar-internal .NavBar-bot .NavBar-bot-right .NavBar-bot-right-dropdown .NavBar-bot-right-dropdown-list{
+.NavBar-external .NavBar-internal .NavBar-top .NavBar-top-right .NavBar-top-right-dropdown .NavBar-top-right-dropdown-btn .material-symbols-outlined{
+    font-size: 33px;
+}
+/* .NavBar-external .NavBar-internal .NavBar-top .NavBar-top-right.loggedIn:hover{
+    opacity: 1;
+} */
+
+.NavBar-external .NavBar-internal .NavBar-top .NavBar-top-right .NavBar-top-right-dropdown .NavBar-top-right-dropdown-list{
     position: absolute;
     background-color: white;
-    top: 28px;
-    right: 0px;
+    color: black;
+    right: 8px;
+    top: 33px;
+    font-weight: normal;
+    font-size: 16px;
     z-index:1;
     /* min-width: 112px; */
 }
 
-.NavBar-external .NavBar-internal .NavBar-bot .NavBar-bot-right .NavBar-bot-right-dropdown .NavBar-bot-right-dropdown-list ul{
+.NavBar-external .NavBar-internal .NavBar-top .NavBar-top-right .NavBar-top-right-dropdown .NavBar-top-right-dropdown-list ul{
     margin: 0;
     padding: 0px;
     box-shadow: 0 9px 9px 0 rgb(0 0 0 / 9%), 0 23px 50px 0 rgb(0 0 0 / 34%);
@@ -116,18 +87,19 @@
     flex-direction: column;
     /* gap: 10px; */
 }
-.NavBar-external .NavBar-internal .NavBar-bot .NavBar-bot-right .NavBar-bot-right-dropdown .NavBar-bot-right-dropdown-list ul li {
+
+.NavBar-external .NavBar-internal .NavBar-top .NavBar-top-right .NavBar-top-right-dropdown .NavBar-top-right-dropdown-list ul li {
     padding: 5px 30px 5px 20px;
 }
 
-.NavBar-external .NavBar-internal .NavBar-bot .NavBar-bot-right .NavBar-bot-right-dropdown .NavBar-bot-right-dropdown-list ul li:first-child {
+.NavBar-external .NavBar-internal .NavBar-top .NavBar-top-right .NavBar-top-right-dropdown .NavBar-top-right-dropdown-list ul li:first-child {
     padding: 10px 30px 5px 20px;
 }
 
-.NavBar-external .NavBar-internal .NavBar-bot .NavBar-bot-right .NavBar-bot-right-dropdown .NavBar-bot-right-dropdown-list ul li:last-child{
+.NavBar-external .NavBar-internal .NavBar-top .NavBar-top-right .NavBar-top-right-dropdown .NavBar-top-right-dropdown-list ul li:last-child{
     padding: 5px 30px 10px 20px;
 }
-.NavBar-external .NavBar-internal .NavBar-bot .NavBar-bot-right .NavBar-bot-right-dropdown .NavBar-bot-right-dropdown-list ul li:hover {
+.NavBar-external .NavBar-internal .NavBar-top .NavBar-top-right .NavBar-top-right-dropdown .NavBar-top-right-dropdown-list ul li:hover {
     color: #727272;
     cursor: pointer;
 }

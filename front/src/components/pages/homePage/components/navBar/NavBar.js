@@ -10,7 +10,6 @@ import mainLogo from "../../../../../imgs/logoflat.png";
 const NavBar = ({usr}) => {
 const [loggedIn, setLoggedIn] = useState(false);
 const [firstName, setFirstName] = useState("");
-//   const [loggedIn, setLoggedIn] = useState(false);
 
 
 let navigate = useNavigate();
@@ -45,39 +44,26 @@ const refDropdown = useRef(null);
                 </div>
                 <div className="NavBar-top-right">
                     {!(loggedIn) ?(
-                        <span onClick={()=>{navigate('/login')}}>Log in</span>
+                        <span className="NavBar-top-right-span" onClick={()=>{navigate('/login')}}>Log in</span>
                     ):(
-                            <span>Welcome, {firstName}</span>
+                        <div className="NavBar-top-right-dropdown">
+                            <div ref={refDropdownbtn} className="NavBar-top-right-dropdown-btn" onClick={()=>{setDropdownIsOpen(!dropdownIsOpen)}}>
+                                <span>Welcome back, {firstName}</span>
+                                <span class="material-symbols-outlined">
+                                    account_circle
+                                </span>
+                            </div>
+                            {(dropdownIsOpen) &&
+                                <div className="NavBar-top-right-dropdown-list" ref={refDropdown}>
+                                    <ul>
+                                        <li>Profile</li>
+                                        <li>Logout</li>
+                                    </ul>
+                                </div>
+                            }
+                        </div>
                     )
                     }
-                </div>
-            </div>
-            <div className="NavBar-bot">
-                <div className="NavBar-bot-left">
-                    <button>All Posts</button>
-                    <button>New Posts</button>
-                    <button>My Posts</button>
-                </div>
-                <div className="NavBar-bot-right">
-                    <div className="NavBar-bot-right-dropdown">
-                        <div ref={refDropdownbtn} className="NavBar-bot-right-dropdown-btn" onClick={()=>{setDropdownIsOpen(!dropdownIsOpen)}}>
-                            <div className="NavBar-bot-right-dropdown-txt">
-                                Sort by: Date
-                            </div>
-                            <span className="material-symbols-rounded">
-                                expand_more
-                            </span>
-                        </div>
-                        {(dropdownIsOpen) &&
-                            <div className="NavBar-bot-right-dropdown-list" ref={refDropdown}>
-                                <ul>
-                                    <li>Date</li>
-                                    <li>Likes</li>
-                                    <li>Hates</li>
-                                </ul>
-                            </div>
-                        }
-                    </div>
                 </div>
             </div>
         </div>
