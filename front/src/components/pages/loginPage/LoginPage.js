@@ -82,12 +82,14 @@ const LoginPage = () => {
       })
         .then(res => {
           setEmail("");
+          setEmailDisabled(false);
           setIsLogin(true);
           setIsRegister(false);
           setIsLoading(false);
         })
         .catch(error =>{
           setEmail("");
+          setEmailDisabled(false);
           setIsLogin(false);
           setIsRegister(false);
           setIsLoading(false);

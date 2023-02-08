@@ -14,12 +14,7 @@ export class UsersService {
     const newUser = this.userRepository.create(createUserDto);
     return this.userRepository.save(newUser);
   }
-
-  loginUser(loginUserDto: LoginUserDto) {
-    // const newUser = this.userRepository.create(loginUserDto);
-    // return this.userRepository.save(newUser);
-  }
-
+  
   getUsers() {
     return this.userRepository.find();
   }
