@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsString, MinLength } from "class-validator";
+import { isNotEmpty, IsNotEmpty, isString, IsString, MinLength } from "class-validator";
 
 export class CreateMovieDto {
     @IsNotEmpty()
@@ -11,4 +11,12 @@ export class CreateMovieDto {
 
     @IsNotEmpty()
     author: number;
+}
+
+export class MovieReactionDto {
+    @IsNotEmpty()
+    user: number;
+
+    @IsNotEmpty()
+    reaction: number;
 }

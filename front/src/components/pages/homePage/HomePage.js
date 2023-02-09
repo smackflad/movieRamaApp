@@ -36,41 +36,36 @@ const HomePage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
   
-  const [moviesArray, setMoviesArray] = useState([]);
+  // const [moviesArray, setMoviesArray] = useState([]);
+  const [moviesArrayTemp, setMoviesArrayTemp] = useState([]);
+
+
   useEffect(()=>{
     setIsLoading(true);
     const token= localStorage.getItem('accessToken');
-    axios.defaults.headers.common = {'Authorization': `Bearer ${token}`}
-    axios.post(`http://localhost:3001/users/validate`)
-    .then(res => {
-      setUsr(res.data);
-      setLoggedIn(true);
-      // setIsLoading(false);
-      // sequence();
-    })
-    .catch(error =>{
-      localStorage.clear('accessToken');
+    if(token){
+      axios.defaults.headers.common = {'Authorization': `Bearer ${token}`}
+      axios.post(`http://localhost:3001/users/validate`)
+      .then(res => {
+        setUsr(res.data);
+        setLoggedIn(true);
+        // console.log(res.data)
+        // setIsLoading(false);
+        // sequence();
+      })
+      .catch(error =>{
+        localStorage.clear('accessToken');
+        setLoggedIn(false);
+        // setIsLoading(false);
+        // sequence();
+      })
+    }else{
       setLoggedIn(false);
-      // setIsLoading(false);
-      // sequence();
-    })
+    }
     axios.defaults.headers.common = {}
     axios.get(`http://localhost:3001/movies`)
     .then(res => {
-      setMoviesArray(res.data.map((mv)=>
-        <li key={mv.id}>
-          <MovieComponent
-          id={mv.id}
-          title={mv.title}
-          desc={mv.description}
-          nOuser={mv.authorName}
-          dOpublic={mv.datePosted}
-          nOlikes={mv.likes}
-          nOHates={mv.hates}
-          usr={usr}
-          />
-        </li>
-      ))
+      setMoviesArrayTemp(res.data)
       // setUsr(res.data);
       // setLoggedIn(true);
       setIsLoading(false);
@@ -164,6 +159,29 @@ const item = {
     
 };
 
+const MoviesArray = ({mvs, cUsr}) =>{
+  return (
+    <>
+    {mvs.map((mv)=>{
+      return (
+        <li key={mv.id}>
+        <MovieComponent
+        id={mv.id}
+        title={mv.title}
+        desc={mv.description}
+        nOuser={mv.authorName}
+        dOpublic={mv.datePosted}
+        nOlikes={mv.likes}
+        nOHates={mv.hates}
+        usr={cUsr}
+        />
+      </li>
+      );
+    })}
+    </>
+  );
+};
+
 return (
   <div className="homePage-external">
     <motion.div className="homePage-logo"
@@ -210,7 +228,7 @@ return (
           </div>
         </div>
         <ul>
-          {moviesArray}
+          <MoviesArray mvs={moviesArrayTemp} cUsr={usr}/>
         </ul>
         {(loggedIn) &&
           <motion.div className="Homepage-chevronBtn" variants={item}

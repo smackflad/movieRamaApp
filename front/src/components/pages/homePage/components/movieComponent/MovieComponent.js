@@ -4,23 +4,26 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import 'animate.css'
 import { useAnimation, motion, delay, AnimatePresence, useInView } from "framer-motion";
+import axios from 'axios';
 
-const MovieComponent = ({usr={}, id, title, desc, nOuser, dOpublic, nOlikes, nOHates}) => {
+const MovieComponent = ({usr, id, title, desc, nOuser, dOpublic, nOlikes, nOHates}) => {
     let navigate = useNavigate();
     const [hasReaction, setHasReaction] = useState(0);
     const [isBool, setIsBool] = useState(false);
 
-    if(usr.id){
-        if(nOlikes.some(item => item === usr.id)){
-            setHasReaction(1)
-        }else{
-            if(nOHates.some(item => item === usr.id)){
-                setHasReaction(2);
-            }else{
-                setHasReaction(0);
-            }
-        }
+    const react = (reaction) =>{
+        axios.patch(`http://localhost:3001/movies/react/${id}`, {
+            user: parseInt(usr.id),
+            reaction: reaction
+        })
+    .catch(error => {
+      return false
+    })
+    return true;
     }
+
+    const [likesC, setLikesC] = useState(nOlikes.length)
+    const [hatesC, setHatesC] = useState(nOHates.length)
 
     const targetDate = new Date(dOpublic);
     const currentDate = new Date();
@@ -51,8 +54,19 @@ const MovieComponent = ({usr={}, id, title, desc, nOuser, dOpublic, nOlikes, nOH
     const [loggedIn, setLoggedIn] = useState(false);
 
     useEffect(() =>{
-        if(usr.id){
-            setLoggedIn(true);
+        if(usr){
+            if(usr.id){
+                setLoggedIn(true);
+            }
+            if(nOlikes.includes(parseInt(usr.id))){
+                setHasReaction(1)
+            }else{
+                if(nOHates.includes(parseInt(usr.id))){
+                    setHasReaction(2);
+                }else{
+                    setHasReaction(0);
+                }
+            }
         }
     }, []);
 
@@ -75,9 +89,7 @@ const MovieComponent = ({usr={}, id, title, desc, nOuser, dOpublic, nOlikes, nOH
 
   return (
     <motion.div variants={item} ref={itemRef}  className="homePage-posts-container"
-    style={{
-        // opacity: isInView ? 1 : 0,
-      }}
+        key={id}
       whileInView={{opacity: 1}}
       viewport={{ once: true }}
       >
@@ -99,13 +111,13 @@ const MovieComponent = ({usr={}, id, title, desc, nOuser, dOpublic, nOlikes, nOH
                         <div className="movieCBot-right-left">
                             <div className="movieCBot-right-left-inner">
                                 <div className="movieCBot-right-left-center">    
-                                    <span>5</span>
+                                    <span>{likesC}</span>
                                 </div>
                                 <span className="material-icons md-green movieCBot-right-left-mood">
                                     mood
                                 </span>
                                 <div className="movieCBot-right-left-center">    
-                                    <span>10</span>
+                                    <span>{hatesC}</span>
                                 </div>
                                 <span className="material-icons md-red movieCBot-right-left-dissat">
                                     sentiment_very_dissatisfied
@@ -117,7 +129,7 @@ const MovieComponent = ({usr={}, id, title, desc, nOuser, dOpublic, nOlikes, nOH
                                 {isBool && 
                                     <div className="movieCBot-right-container movieCBot-right-top-container"
                                     >
-                                        <motion.span className="material-icons md-green" onClick={()=>{if(hasReaction === 1){setHasReaction(0);}else{setHasReaction(1)}setIsBool(false);}}
+                                        <motion.span className="material-icons md-green" onClick={()=>{if(hasReaction === 1){if(react(1))setHasReaction(0);}else{if(react(1))setHasReaction(1)}setIsBool(false);}}
                                         initial={{ opacity: 0, scale: 0.5, y: 30, x: 30 }}
                                         animate={{ opacity: 1, scale: 1, y: 0, x: 0}}
                                         whileHover={{ scale: 1.1 }}
@@ -132,7 +144,7 @@ const MovieComponent = ({usr={}, id, title, desc, nOuser, dOpublic, nOlikes, nOH
                                         }}>
                                             mood
                                         </motion.span>
-                                        <motion.span className="material-icons md-red" onClick={()=>{if(hasReaction === 2){setHasReaction(0);}else{setHasReaction(2)}setIsBool(false);}}
+                                        <motion.span className="material-icons md-red" onClick={()=>{if(hasReaction === 2){if(react(2))setHasReaction(0);}else{if(react(2))setHasReaction(2)}setIsBool(false);}}
                                         initial={{ opacity: 0, scale: 0.5, y: 30, x: -30 }}
                                         animate={{ opacity: 1, scale: 1, y: 0, x: 0}}
                                         whileHover={{ scale: 1.1 }}
@@ -161,7 +173,7 @@ const MovieComponent = ({usr={}, id, title, desc, nOuser, dOpublic, nOlikes, nOH
                                         <motion.span className="movieCBot-right-container movieCBot-right-add material-icons md-green"
                                         onMouseEnter={()=>{setIsBool(true);}}
                                         animate={{ rotate: 360 }}
-                                        onClick={()=>{setHasReaction(0)}}
+                                        onClick={()=>{react(1);setHasReaction(0)}}
                                         >
                                             mood
                                         </motion.span>
@@ -170,7 +182,7 @@ const MovieComponent = ({usr={}, id, title, desc, nOuser, dOpublic, nOlikes, nOH
                                         <motion.span className="movieCBot-right-container movieCBot-right-add material-icons md-red"
                                         onMouseEnter={()=>{setIsBool(true);}}
                                         animate={{ rotate: 360 }}
-                                        onClick={()=>{setHasReaction(0)}}
+                                        onClick={()=>{react(2);setHasReaction(0)}}
                                         >
                                             sentiment_very_dissatisfied
                                         </motion.span>
