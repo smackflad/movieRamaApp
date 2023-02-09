@@ -159,28 +159,6 @@ const item = {
     
 };
 
-const MoviesArray = ({mvs, cUsr}) =>{
-  return (
-    <>
-    {mvs.map((mv)=>{
-      return (
-        <li key={mv.id}>
-        <MovieComponent
-        id={mv.id}
-        title={mv.title}
-        desc={mv.description}
-        nOuser={mv.authorName}
-        dOpublic={mv.datePosted}
-        nOlikes={mv.likes}
-        nOHates={mv.hates}
-        usr={cUsr}
-        />
-      </li>
-      );
-    })}
-    </>
-  );
-};
 
 return (
   <div className="homePage-external">
@@ -197,7 +175,7 @@ return (
       animate="show"
       >
         <NavBar usr={usr}/>
-        <div className="homePage-NavBar-bot">
+        <motion.div variants={item} className="homePage-NavBar-bot">
           <div className="homePage-NavBar-bot-left">
               <button>All Posts</button>
               <button>New Posts</button>
@@ -226,10 +204,24 @@ return (
                   }
               </div>
           </div>
-        </div>
-        <ul>
-          <MoviesArray mvs={moviesArrayTemp} cUsr={usr}/>
-        </ul>
+        </motion.div>
+        {
+        moviesArrayTemp.map((mv)=>{
+          return (
+            <MovieComponent
+            key={mv.id}
+            id={mv.id}
+            title={mv.title}
+            desc={mv.description}
+            nOuser={mv.authorName}
+            dOpublic={mv.datePosted}
+            nOlikes={mv.likes}
+            nOHates={mv.hates}
+            usr={usr}
+            />
+            );
+          })
+        }
         {(loggedIn) &&
           <motion.div className="Homepage-chevronBtn" variants={item}
             whileTap={{scale:0.8}}

@@ -81,20 +81,13 @@ const MovieComponent = ({usr, id, title, desc, nOuser, dOpublic, nOlikes, nOHate
         
     };
 
-    const itemRef = useRef(null);
-    const isInView = useInView(itemRef, { once: true });
-    //   useEffect(()=>{
-    //     console.log(isInView);
-    //   },[isInView]);
-
   return (
-    <motion.div variants={item} ref={itemRef}  className="homePage-posts-container"
-        key={id}
+    <motion.div variants={item}  className="homePage-posts-container"
+        // key={id}
       whileInView={{opacity: 1}}
       viewport={{ once: true }}
       >
-        <div className="MovieComponent-external"
-        >
+        <div className="MovieComponent-external">
             <div className="MovieComponent-internal">
                 <div className="movieC-top">
                     <span>{title}</span>

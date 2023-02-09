@@ -123,17 +123,7 @@
     flex-direction: column;
     overflow-y:scroll;
     height: 100%;
-
-}
-
-.homePage-external .homePage-posts ul {
-    margin: 0;
-    padding: 0;
-    list-style-type: none;
-}
-
-.homePage-external .homePage-posts ul li {
-    margin-top: 10px;
+    width: 100%;
 }
 
 .homePage-external .homePage-posts > * {
