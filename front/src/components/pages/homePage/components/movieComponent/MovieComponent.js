@@ -5,10 +5,47 @@ import { useState } from "react";
 import 'animate.css'
 import { useAnimation, motion, delay, AnimatePresence, useInView } from "framer-motion";
 
-const MovieComponent = ({usr={}, id, title, desc, nOuser, dOpublic, nOlikes, nOHates, isLiked}) => {
+const MovieComponent = ({usr={}, id, title, desc, nOuser, dOpublic, nOlikes, nOHates}) => {
     let navigate = useNavigate();
-    const [hasReaction, setHasReaction] = useState(isLiked);
+    const [hasReaction, setHasReaction] = useState(0);
     const [isBool, setIsBool] = useState(false);
+
+    if(usr.id){
+        if(nOlikes.some(item => item === usr.id)){
+            setHasReaction(1)
+        }else{
+            if(nOHates.some(item => item === usr.id)){
+                setHasReaction(2);
+            }else{
+                setHasReaction(0);
+            }
+        }
+    }
+
+    const targetDate = new Date(dOpublic);
+    const currentDate = new Date();
+    const differenceInMilliseconds = currentDate - targetDate;
+    // setDifference(differenceInMilliseconds);
+    // const [dateElement, setDateElement] = useEffect();
+    let dateElement;
+    if(Math.floor(differenceInMilliseconds / 1000 / 60 / 60 / 24) > 0){
+        dateElement = <span className="movieCBot-left-days" title="29/1/2023, 18:00">
+            {Math.floor(differenceInMilliseconds / 1000 / 60 / 60 / 24)} days ago
+        </span>;
+    }else if(Math.floor((differenceInMilliseconds / 1000 / 60 / 60) % 24) > 0){
+        dateElement = <span className="movieCBot-left-days" title="29/1/2023, 18:00">
+            {Math.floor((differenceInMilliseconds / 1000 / 60 / 60) % 24)} hours ago
+        </span>;
+    }else if(Math.floor((differenceInMilliseconds / 1000 / 60) % 60) > 0){
+        dateElement = <span className="movieCBot-left-days" title="29/1/2023, 18:00">
+            {Math.floor((differenceInMilliseconds / 1000 / 60) % 60)} minutes ago
+        </span>;
+    }else{
+        dateElement = <span className="movieCBot-left-days" title="29/1/2023, 18:00">
+            {Math.floor((differenceInMilliseconds / 1000) % 60)} seconds ago
+        </span>;
+    }
+
 
 
     const [loggedIn, setLoggedIn] = useState(false);
@@ -56,9 +93,7 @@ const MovieComponent = ({usr={}, id, title, desc, nOuser, dOpublic, nOlikes, nOH
                 <div className="movieC-bottom">
                     <div className="movieCBot-left">
                         <span>Posted by {nOuser}</span>
-                        <span className="movieCBot-left-days" title="29/1/2023, 18:00">
-                            2 days ago
-                        </span>
+                        {dateElement}
                     </div>
                     <div className="movieCBot-right">
                         <div className="movieCBot-right-left">

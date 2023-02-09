@@ -35,18 +35,60 @@ const HomePage = () => {
   const [usr, setUsr] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
-
+  
+  const [moviesArray, setMoviesArray] = useState([]);
   useEffect(()=>{
     setIsLoading(true);
     const token= localStorage.getItem('accessToken');
     axios.defaults.headers.common = {'Authorization': `Bearer ${token}`}
     axios.post(`http://localhost:3001/users/validate`)
     .then(res => {
-      console.log(res.data);
       setUsr(res.data);
       setLoggedIn(true);
+      // setIsLoading(false);
+      // sequence();
+    })
+    .catch(error =>{
+      localStorage.clear('accessToken');
+      setLoggedIn(false);
+      // setIsLoading(false);
+      // sequence();
+    })
+    axios.defaults.headers.common = {}
+    axios.get(`http://localhost:3001/movies`)
+    .then(res => {
+      setMoviesArray(res.data.map((mv)=>
+        <li key={mv.id}>
+          <MovieComponent
+          id={mv.id}
+          title={mv.title}
+          desc={mv.description}
+          nOuser={mv.authorName}
+          dOpublic={mv.datePosted}
+          nOlikes={mv.likes}
+          nOHates={mv.hates}
+          usr={usr}
+          />
+        </li>
+      ))
+      // setUsr(res.data);
+      // setLoggedIn(true);
       setIsLoading(false);
       sequence();
+    })
+    .catch(error =>{
+      // localStorage.clear('accessToken');
+      setIsLoading(false);
+      // setLoggedIn(false);
+      sequence();
+    })
+  }, [])
+
+  useEffect(()=>{
+    setIsLoading(true);
+    axios.get(`http://localhost:3001/movies`)
+    .then(res => {
+      setIsLoading(false);
     })
     .catch(error =>{
       localStorage.clear('accessToken');
@@ -167,46 +209,9 @@ return (
               </div>
           </div>
         </div>
-        <MovieComponent
-          id={5}
-          title={"The Empire Strikes Back"}
-          desc={"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."}
-          nOuser={"Smackflad"}
-          nOlikes={5}
-          nOHates={3}
-          isLiked={0}
-          usr={usr}
-          />
-        <MovieComponent
-          id={5}
-          title={"The Empire Strikes Back"}
-          desc={"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."}
-          nOuser={"Smackflad"}
-          nOlikes={5}
-          nOHates={3}
-          isLiked={1}
-          usr={usr}
-          />
-        <MovieComponent
-          id={5}
-          title={"The Empire Strikes Back"}
-          desc={"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."}
-          nOuser={"Smackflad"}
-          nOlikes={5}
-          nOHates={3}
-          isLiked={2}
-          usr={usr}
-          />
-        <MovieComponent
-          id={5}
-          title={"The Empire Strikes Back"}
-          desc={"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."}
-          nOuser={"Smackflad"}
-          nOlikes={5}
-          nOHates={3}
-          isLiked={0}
-          usr={usr}
-        />
+        <ul>
+          {moviesArray}
+        </ul>
         {(loggedIn) &&
           <motion.div className="Homepage-chevronBtn" variants={item}
             whileTap={{scale:0.8}}

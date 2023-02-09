@@ -12,10 +12,15 @@
     background-color: white;
     color: black;
     /* width: 80%; */
+    min-width: 100%;
     max-width: 800px;
     flex-direction: column;
     align-items: center;
     text-align: left;
+}
+
+.MovieComponent-external .MovieComponent-internal .movieC-middle {
+    width: 100%;
 }
 
 .MovieComponent-external .MovieComponent-internal .movieC-bottom{
@@ -92,6 +97,7 @@
 @media only screen and (max-width: 900px) {
     .MovieComponent-internal {
         width: 80%;
+        min-width: unset !important;
     }
 }
 

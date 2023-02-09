@@ -26,6 +26,12 @@ export class Movie {
   })
   author: number;
 
+  @Column({
+    nullable: false,
+    unique: false,
+  })
+  authorName: string;
+
   @CreateDateColumn()
   datePosted: Date;
 

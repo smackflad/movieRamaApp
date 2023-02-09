@@ -126,6 +126,16 @@
 
 }
 
+.homePage-external .homePage-posts ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+.homePage-external .homePage-posts ul li {
+    margin-top: 10px;
+}
+
 .homePage-external .homePage-posts > * {
     margin-top: 10px;
 }
