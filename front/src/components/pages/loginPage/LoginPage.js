@@ -34,10 +34,9 @@ const LoginPage = () => {
       
   };
 
-  const handleSubmit = async ()=>{
+  const handleSubmit = async (e)=>{
+    e.preventDefault();
     setEmailDisabled(true);
-    // e.preventDefault();
-    // console.log(e.target);
     setIsLoading(true);
     await axios.post(`http://localhost:3001/users/exists`, {
       email: email
@@ -60,7 +59,6 @@ const LoginPage = () => {
       password: e.target.password.value
     })
       .then(res => {
-        // res.data.accessToken
         localStorage.setItem("accessToken", res.data.accessToken);
         setIsLoading(false);
         navigate("/")
@@ -73,7 +71,6 @@ const LoginPage = () => {
 
   const handleRegister = async (e)=>{
     e.preventDefault();
-    // console.log(e.target.firstName.value);
     if(e.target.password.value !== e.target.repPass.value){
 
     }else{
@@ -141,9 +138,26 @@ return (
         </AnimatePresence>
       </div>
       <div className="loginPage-logo-container-low">
-        <span class="material-symbols-outlined">
-          arrow_back_ios_new
-        </span>
+        <AnimatePresence>
+          {(isLogin || isRegister) &&
+            <motion.span
+              key="backbtn"
+              initial={{ x: 100, opacity:0}}
+              animate={{ x: 0, opacity:1}}
+              whileTap={{scale:0.8}}
+              whileHover={{scale:1.1}}
+              className="material-symbols-outlined"
+              onClick={()=>{
+                setEmail("");
+                setEmailDisabled(false);
+                setIsLogin(false);
+                setIsRegister(false);
+                setIsLoading(false);}
+              }>
+                arrow_back_ios_new
+            </motion.span>
+          }
+        </AnimatePresence>
         {(!(isLogin || isRegister) || isLogin) &&
           <span className="loginPage-logo-low">Connect!</span>
         }
@@ -154,7 +168,7 @@ return (
       <div className="loginPage-other">
         <div className="loginPage-inputs">
           {!(isLogin || isRegister) &&
-            <form> {/* first step */}
+            <form onSubmit={handleSubmit}> {/* first step */}
               <CustomTextBox 
                 keyy="email"
                 name="email"
@@ -168,7 +182,7 @@ return (
               {!(isLoading) ?
                 (
                   <>
-                    <motion.input className="loginPage-inputs-submit" type="submit" onClick={()=>{handleSubmit() }} value="Connect"
+                    <motion.input className="loginPage-inputs-submit" type="submit" value="Connect"
                       key="submit"
                       initial={{ y: 100, opacity:0}}
                       animate={{ y: 0, opacity:1}}
