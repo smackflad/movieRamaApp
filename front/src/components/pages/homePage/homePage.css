@@ -54,7 +54,7 @@
     z-index: 1;
 }
 
-@media only screen and (max-width: 900px) {
+@media only screen and (max-width: 1020px) {
     .homePage-NavBar-bot {
         width: 80%;
         min-width: unset;
@@ -68,7 +68,7 @@
 }
 
 .homePage-NavBar-bot .homePage-NavBar-bot-left button{
-    border-radius: 25px;
+    border-radius: 5px;
     padding: 4px 10px;
     border: none;
     background-color: white;
@@ -118,7 +118,7 @@
     cursor: pointer;
 }
 
-.homePage-external .homePage-posts{
+.homePage-external .homePage-internal{
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -127,10 +127,17 @@
     width: 100%;
 }
 
-.homePage-external .homePage-posts > * {
+.homePage-external .homePage-internal > *, .homePage-external .homePage-internal .homePage-posts > * {
     margin-top: 10px;
 }
 
+.homePage-posts {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
 
 .chevronButton {
     margin: 0;

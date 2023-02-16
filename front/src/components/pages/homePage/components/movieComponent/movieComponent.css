@@ -20,6 +20,7 @@
     flex-direction: column;
     align-items: center;
     text-align: left;
+    border-radius: 5px;
 }
 
 .MovieComponent-external .MovieComponent-internal .movieC-middle {
@@ -97,7 +98,7 @@
     width: max-content;
 }
 
-@media only screen and (max-width: 900px) {
+@media only screen and (max-width: 1020px) {
     .homePage-posts-container {
         width: 80%;
         /* min-width: unset !important; */

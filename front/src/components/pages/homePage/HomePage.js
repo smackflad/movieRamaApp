@@ -15,7 +15,9 @@ import axios from 'axios';
 const HomePage = () => {
   let navigate = useNavigate();
 
+
   const [firstLoad, setFirstLoad]= useState(0);
+  const [seq, setSeq] = useState(false);
 
   const [by, setBy] = useState(0);
   const [order, setOrder] = useState(0);
@@ -88,6 +90,7 @@ const HomePage = () => {
   }, [by])
 
 
+
   
   
   const animationControls = useAnimation();
@@ -95,32 +98,15 @@ const HomePage = () => {
     await animationControls.start({ scale: 1.5, transition: {delay: 0.5} });
     await animationControls.start({ scale: 0 });
     animationControls.start({
-        opacity: 0,
-        transitionEnd: {
-          display: "none"
-        }
-      });
-    }
-    
-  useEffect(()=>{
-    // sequence();
-  });
-
-  if(isLoading){
-    return (<>
-    <div className="homePage-external">
-      <motion.div className="homePage-logo"
-        initial={{ scale: 1 }}
-        animate={animationControls}
-      >
-        <img src={mainLogo} />
-        <img className="homePage-logo-loading" src={loading} />
-      </motion.div>
-    </div>
-  </>)
+      opacity: 0,
+      transitionEnd: {
+        display: "none"
+      }
+    });
+    setSeq(true);
   }
 
-  
+
   const container = {
     show: {
       opacity: 1,
@@ -161,9 +147,12 @@ return (
       animate={animationControls}
     >
       <img src={mainLogo} />
+      {isLoading &&
+        <img className="homePage-logo-loading" src={loading} />
+      }
     </motion.div>
     <motion.div
-      className="homePage-posts"
+      className="homePage-internal"
       variants={container}
       initial="hidden"
       animate="show"
@@ -199,25 +188,36 @@ return (
               </div>
           </div>
         </motion.div>
-        {
-        moviesArrayTemp.map((mv)=>{
-          return (
-            <MovieComponent
-            key={mv.id}
-            id={mv.id}
-            title={mv.title}
-            desc={mv.description}
-            nOuser={mv.authorName}
-            dOpublic={mv.datePosted}
-            nOlikes={mv.likes}
-            nOHates={mv.hates}
-            usr={usr}
-            />
-            );
-          })
+        {(isLoading || !seq) ? (
+          <div className="homePage-posts">
+            <img className="homePage-logo-loading" src={loading} />
+          </div>
+        ): (
+          <motion.div className="homePage-posts">
+            {
+            moviesArrayTemp.map((mv)=>{
+              return (
+                <MovieComponent
+                key={mv.id}
+                id={mv.id}
+                title={mv.title}
+                desc={mv.description}
+                nOuser={mv.authorName}
+                dOpublic={mv.datePosted}
+                nOlikes={mv.likes}
+                nOHates={mv.hates}
+                usr={usr}
+                anim={firstLoad}
+                />
+                );
+              })
+            }
+          </motion.div>
+        )
         }
-        {(loggedIn) &&
+        {(loggedIn && seq) &&
           <motion.div className="Homepage-chevronBtn" variants={item}
+            key={"chevronBtn"}
             whileTap={{scale:0.8}}
             whileHover={{scale:1.1}}
             onClick={()=>{navigate('/createMovie')}}>

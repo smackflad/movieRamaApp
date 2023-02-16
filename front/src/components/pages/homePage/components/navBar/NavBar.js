@@ -12,6 +12,7 @@ const [loggedIn, setLoggedIn] = useState(false);
 const [firstName, setFirstName] = useState("");
 
 
+
 let navigate = useNavigate();
 const [dropdownIsOpen, setDropdownIsOpen] = useState(false);
 
@@ -24,7 +25,7 @@ const refDropdown = useRef(null);
           setLoggedIn(true);
       }
     document.addEventListener("click", handleClickOutside, true);
-  }, []);
+  }, [usr]);
 
   const handleClickOutside = (e) =>{
     if(refDropdownbtn.current && !refDropdownbtn.current.contains(e.target) && refDropdown.current && !refDropdown.current.contains(e.target)){

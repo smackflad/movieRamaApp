@@ -6,11 +6,12 @@ import 'animate.css'
 import { useAnimation, motion, delay, AnimatePresence, useInView } from "framer-motion";
 import axios from 'axios';
 
-const MovieComponent = ({usr, id, title, desc, nOuser, dOpublic, nOlikes, nOHates}) => {
+const MovieComponent = ({usr, id, title, desc, nOuser, dOpublic, nOlikes, nOHates, anim}) => {
     let navigate = useNavigate();
     const [hasReaction, setHasReaction] = useState(0);
     const [isBool, setIsBool] = useState(false);
 
+    // console.log("test: ", anim)
 
     const react = (reaction) =>{
         axios.patch(`http://localhost:3001/movies/react/${id}`, {
@@ -81,17 +82,17 @@ const MovieComponent = ({usr, id, title, desc, nOuser, dOpublic, nOlikes, nOHate
             y: 0,
             transition: { type: "spring", stiffness: 300, damping: 24 }
         },
-        hidden: { opacity: 0, y: -60, transition: { duration: 0.2 } }
-    
-        
+        hidden: { opacity: 0, y: -60, transition: { duration: 0.2 } },
     };
 
   return (
     <motion.div variants={item}  className="homePage-posts-container"
-        // key={id}
-      whileInView={{opacity: 1}}
-      viewport={{ once: true }}
-      >
+        key={id}
+        initial={"hidden"}
+        animate={"show"}
+        whileInView={{opacity: 1}}
+        viewport={{ once: true }}
+    >
         <div className="MovieComponent-external">
             <div className="MovieComponent-internal">
                 <div className="movieC-top">
@@ -125,8 +126,7 @@ const MovieComponent = ({usr, id, title, desc, nOuser, dOpublic, nOlikes, nOHate
                         {(loggedIn) &&
                             <div className="movieCBot-right-right" onMouseLeave={()=>{setIsBool(false);}} onMouseEnter={()=>{setIsBool(true);}}>
                                 {isBool && 
-                                    <div className="movieCBot-right-container movieCBot-right-top-container"
-                                    >
+                                    <div className="movieCBot-right-container movieCBot-right-top-container">
                                         <motion.span className="material-icons md-green" 
                                         onClick={()=>{if(hasReaction === 1){
                                                 if(react(1)){
