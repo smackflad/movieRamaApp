@@ -40,7 +40,7 @@ const refDropdown = useRef(null);
         <div className="NavBar-internal">
             <div className="NavBar-top">
                 <div className="NavBar-top-left">
-                    <img src={mainLogo} />
+                    <img src={mainLogo} onClick={()=>{navigate('/')}} />
                 </div>
                 <div className="NavBar-top-right">
                     {!(loggedIn) ?(

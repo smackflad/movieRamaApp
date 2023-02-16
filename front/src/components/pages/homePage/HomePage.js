@@ -225,12 +225,11 @@ return (
         {(loggedIn) &&
           <motion.div className="Homepage-chevronBtn" variants={item}
             whileTap={{scale:0.8}}
-            whileHover={{scale:1.1}}>
+            whileHover={{scale:1.1}}
+            onClick={()=>{navigate('/createMovie')}}>
             <button
               className="chevronButton"
-              type="submit"
-              onClick={()=>{}}
-            >
+              type="submit">
               <i className="material-icons chevron-item add">
                 {" "}
                 add{" "}

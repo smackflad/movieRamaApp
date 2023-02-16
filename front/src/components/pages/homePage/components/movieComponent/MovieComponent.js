@@ -11,6 +11,7 @@ const MovieComponent = ({usr, id, title, desc, nOuser, dOpublic, nOlikes, nOHate
     const [hasReaction, setHasReaction] = useState(0);
     const [isBool, setIsBool] = useState(false);
 
+
     const react = (reaction) =>{
         axios.patch(`http://localhost:3001/movies/react/${id}`, {
             user: parseInt(usr.id),
@@ -32,19 +33,19 @@ const MovieComponent = ({usr, id, title, desc, nOuser, dOpublic, nOlikes, nOHate
     // const [dateElement, setDateElement] = useEffect();
     let dateElement;
     if(Math.floor(differenceInMilliseconds / 1000 / 60 / 60 / 24) > 0){
-        dateElement = <span className="movieCBot-left-days" title="29/1/2023, 18:00">
+        dateElement = <span className="movieCBot-left-days" title={targetDate}>
             {Math.floor(differenceInMilliseconds / 1000 / 60 / 60 / 24)} days ago
         </span>;
     }else if(Math.floor((differenceInMilliseconds / 1000 / 60 / 60) % 24) > 0){
-        dateElement = <span className="movieCBot-left-days" title="29/1/2023, 18:00">
+        dateElement = <span className="movieCBot-left-days" title={targetDate}>
             {Math.floor((differenceInMilliseconds / 1000 / 60 / 60) % 24)} hours ago
         </span>;
     }else if(Math.floor((differenceInMilliseconds / 1000 / 60) % 60) > 0){
-        dateElement = <span className="movieCBot-left-days" title="29/1/2023, 18:00">
+        dateElement = <span className="movieCBot-left-days" title={targetDate}>
             {Math.floor((differenceInMilliseconds / 1000 / 60) % 60)} minutes ago
         </span>;
     }else{
-        dateElement = <span className="movieCBot-left-days" title="29/1/2023, 18:00">
+        dateElement = <span className="movieCBot-left-days" title={targetDate}>
             {Math.floor((differenceInMilliseconds / 1000) % 60)} seconds ago
         </span>;
     }
@@ -122,7 +123,18 @@ const MovieComponent = ({usr, id, title, desc, nOuser, dOpublic, nOlikes, nOHate
                                 {isBool && 
                                     <div className="movieCBot-right-container movieCBot-right-top-container"
                                     >
-                                        <motion.span className="material-icons md-green" onClick={()=>{if(hasReaction === 1){if(react(1))setHasReaction(0);}else{if(react(1))setHasReaction(1)}setIsBool(false);}}
+                                        <motion.span className="material-icons md-green" 
+                                        onClick={()=>{if(hasReaction === 1){
+                                                if(react(1)){
+                                                    setHasReaction(0);
+                                                    setLikesC(likesC-1);}
+                                            }else{if(react(1)){
+                                                    if(hasReaction === 2){
+                                                        setHatesC(hatesC-1)
+                                                    }
+                                                    setHasReaction(1);
+                                                    setLikesC(likesC+1);}
+                                            }setIsBool(false);}}
                                         initial={{ opacity: 0, scale: 0.5, y: 30, x: 30 }}
                                         animate={{ opacity: 1, scale: 1, y: 0, x: 0}}
                                         whileHover={{ scale: 1.1 }}
@@ -137,7 +149,17 @@ const MovieComponent = ({usr, id, title, desc, nOuser, dOpublic, nOlikes, nOHate
                                         }}>
                                             mood
                                         </motion.span>
-                                        <motion.span className="material-icons md-red" onClick={()=>{if(hasReaction === 2){if(react(2))setHasReaction(0);}else{if(react(2))setHasReaction(2)}setIsBool(false);}}
+                                        <motion.span className="material-icons md-red" 
+                                        onClick={()=>{
+                                            if(hasReaction === 2){if(react(2)){
+                                                    setHasReaction(0);
+                                                    setHatesC(hatesC-1);}
+                                            }else{if(react(2)){
+                                                    if(hasReaction === 1){
+                                                        setLikesC(likesC-1);}
+                                                    setHasReaction(2);
+                                                    setHatesC(hatesC+1);}
+                                            }setIsBool(false);}}
                                         initial={{ opacity: 0, scale: 0.5, y: 30, x: -30 }}
                                         animate={{ opacity: 1, scale: 1, y: 0, x: 0}}
                                         whileHover={{ scale: 1.1 }}
@@ -166,7 +188,7 @@ const MovieComponent = ({usr, id, title, desc, nOuser, dOpublic, nOlikes, nOHate
                                         <motion.span className="movieCBot-right-container movieCBot-right-add material-icons md-green"
                                         onMouseEnter={()=>{setIsBool(true);}}
                                         animate={{ rotate: 360 }}
-                                        onClick={()=>{react(1);setHasReaction(0)}}
+                                        onClick={()=>{react(1);setHasReaction(0);setLikesC(likesC-1)}}
                                         >
                                             mood
                                         </motion.span>
@@ -175,7 +197,7 @@ const MovieComponent = ({usr, id, title, desc, nOuser, dOpublic, nOlikes, nOHate
                                         <motion.span className="movieCBot-right-container movieCBot-right-add material-icons md-red"
                                         onMouseEnter={()=>{setIsBool(true);}}
                                         animate={{ rotate: 360 }}
-                                        onClick={()=>{react(2);setHasReaction(0)}}
+                                        onClick={()=>{react(2);setHasReaction(0);setHatesC(hatesC-1)}}
                                         >
                                             sentiment_very_dissatisfied
                                         </motion.span>

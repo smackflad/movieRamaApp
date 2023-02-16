@@ -29,14 +29,12 @@ export class MoviesService {
         const hates = movie.hates;
 
         if(MovieReactionDto.reaction === 1){
-            console.log(MovieReactionDto.user)
             if(!(likes.includes(MovieReactionDto.user))){
                 likes.push(MovieReactionDto.user);
                 if((hates.includes(MovieReactionDto.user))){
                     hates.splice(hates.indexOf(MovieReactionDto.user), 1);
                 }
             }else{
-                console.log("test")
                 likes.splice(likes.indexOf(MovieReactionDto.user), 1);
             }
         }else if(MovieReactionDto.reaction === 2){

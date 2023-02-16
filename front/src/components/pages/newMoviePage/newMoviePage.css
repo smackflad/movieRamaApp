@@ -1,0 +1,23 @@
+.newMoviePage-external{
+    width: 100%;
+    height: 100%;
+}
+
+.newMoviePage-external .newMoviePage-logo{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.newMoviePage-external .newMoviePage-logo .newMoviePage-logo-loading {
+    min-width: 25px;
+    position: absolute;
+    bottom: 150px;
+}
+
+.newMoviePage-external > * {
+    margin-top: 10px;
+}
