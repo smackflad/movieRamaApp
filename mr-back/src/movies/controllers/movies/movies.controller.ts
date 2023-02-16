@@ -7,10 +7,10 @@ export class MoviesController {
     constructor(private readonly movieService: MoviesService) {}
 
     
-    @Get()
-    getMovies(){
+    @Get('/:by/:order')
+    getMovies(@Param('by', ParseIntPipe) by: number, @Param('order', ParseIntPipe) order: number){
         // return "this.movieService.getMovies()";
-        return this.movieService.getMovies();
+        return this.movieService.getMovies(by, order);
     }
     
     @Get('author/:id')

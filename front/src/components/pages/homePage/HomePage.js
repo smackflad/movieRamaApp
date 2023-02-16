@@ -15,6 +15,12 @@ import axios from 'axios';
 const HomePage = () => {
   let navigate = useNavigate();
 
+  const [firstLoad, setFirstLoad]= useState(0);
+
+  const [by, setBy] = useState(0);
+  const [order, setOrder] = useState(0);
+  const [orderTxt, setOrderTxt] = useState("Date");
+
   const [dropdownIsOpen, setDropdownIsOpen] = useState(false);
 
   const refDropdown = useRef(null);
@@ -49,21 +55,23 @@ const HomePage = () => {
       .then(res => {
         setUsr(res.data);
         setLoggedIn(true);
-        // console.log(res.data)
-        // setIsLoading(false);
-        // sequence();
       })
       .catch(error =>{
         localStorage.clear('accessToken');
         setLoggedIn(false);
-        // setIsLoading(false);
-        // sequence();
       })
     }else{
       setLoggedIn(false);
     }
+  }, [])
+
+  useEffect(()=>{
+    if(moviesArrayTemp.length !== 0){
+      setFirstLoad(1);
+    }
+    setIsLoading(true);
     axios.defaults.headers.common = {}
-    axios.get(`http://localhost:3001/movies`)
+    axios.get(`http://localhost:3001/movies/`+by+`/0`)
     .then(res => {
       setMoviesArrayTemp(res.data)
       // setUsr(res.data);
@@ -77,21 +85,7 @@ const HomePage = () => {
       // setLoggedIn(false);
       sequence();
     })
-  }, [])
-
-  useEffect(()=>{
-    setIsLoading(true);
-    axios.get(`http://localhost:3001/movies`)
-    .then(res => {
-      setIsLoading(false);
-    })
-    .catch(error =>{
-      localStorage.clear('accessToken');
-      setIsLoading(false);
-      setLoggedIn(false);
-      sequence();
-    })
-  }, [])
+  }, [by])
 
 
   
@@ -187,7 +181,7 @@ return (
               <div className="homePage-NavBar-bot-right-dropdown">
                   <div ref={refDropdownbtn} className="homePage-NavBar-bot-right-dropdown-btn" onClick={()=>{setDropdownIsOpen(!dropdownIsOpen)}}>
                       <div className="homePage-NavBar-bot-right-dropdown-txt">
-                          Sort by: Date
+                          Sort by: {orderTxt}
                       </div>
                       <span className="material-symbols-rounded">
                           expand_more
@@ -196,9 +190,9 @@ return (
                   {(dropdownIsOpen) &&
                       <div className="homePage-NavBar-bot-right-dropdown-list" ref={refDropdown}>
                           <ul>
-                              <li>Date</li>
-                              <li>Likes</li>
-                              <li>Hates</li>
+                              <li onClick={()=>{setOrderTxt("Date"); setBy(0);setDropdownIsOpen(false)}}>Date</li>
+                              <li onClick={()=>{setOrderTxt("Likes"); setBy(1);setDropdownIsOpen(false)}}>Likes</li>
+                              <li onClick={()=>{setOrderTxt("Hates"); setBy(2);setDropdownIsOpen(false)}}>Hates</li>
                           </ul>
                       </div>
                   }

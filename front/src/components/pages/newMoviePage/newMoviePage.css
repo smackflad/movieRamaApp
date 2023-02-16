@@ -21,3 +21,75 @@
 .newMoviePage-external > * {
     margin-top: 10px;
 }
+
+.newMoviePage-external .newMoviePage-internal {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+.newMoviePage-external .newMoviePage-internal form{
+    background-color: white;
+    box-shadow: 0 9px 9px 0 rgb(0 0 0 / 9%), 0 23px 50px 0 rgb(0 0 0 / 34%);
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+    min-width: 800px;
+    padding: 25px 15px;
+    border-radius: 5px;
+    align-items: center;
+}
+
+@media only screen and (max-width: 1100px) {
+    .newMoviePage-external .newMoviePage-internal form {
+        width: 80%;
+        min-width: unset;
+    }
+}
+
+.newMoviePage-external .newMoviePage-internal form .newMoviePage-title {
+    outline: none;
+    border: none;
+    box-shadow: 0 9px 9px 0 rgb(0 0 0 / 9%), 0 23px 50px 0 rgb(0 0 0 / 34%);
+    line-height: 43px;
+    padding: 0px 10px;
+    font-size: 22px;
+    color: #0000009e;
+    border-radius: 5px;
+    width: 90%;
+}
+
+.newMoviePage-external .newMoviePage-internal form .newMoviePage-desc {
+    width: 100%;
+    height: 200px;
+    padding: 12px 20px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    background-color: #ffffff;
+    font-size: 14px;
+    resize: none;
+    outline: none;
+    border: none;
+    box-shadow: 0 9px 9px 0 rgb(0 0 0 / 9%), 0 23px 50px 0 rgb(0 0 0 / 34%);
+}
+
+.newMoviePage-external .newMoviePage-internal .newMoviePage-submit-container{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.newMoviePage-external .newMoviePage-internal .newMoviePage-submit {
+    margin-right: 15px;
+    background: none;
+    color: #000000b0;
+    border: none;
+    border-radius: 10px;
+    padding: 5px 15px;
+    font: inherit;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: 600;
+    outline: inherit;
+    box-shadow: 0 9px 9px 0 rgb(0 0 0 / 9%), 0 23px 50px 0 rgb(0 0 0 / 34%);
+}

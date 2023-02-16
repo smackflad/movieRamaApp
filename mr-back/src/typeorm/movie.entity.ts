@@ -32,7 +32,7 @@ export class Movie {
   })
   authorName: string;
 
-  @CreateDateColumn()
+  @CreateDateColumn({type: 'timestamp with time zone'})
   datePosted: Date;
 
   @Column({

@@ -25,27 +25,31 @@ const MovieComponent = ({usr, id, title, desc, nOuser, dOpublic, nOlikes, nOHate
 
     const [likesC, setLikesC] = useState(nOlikes.length)
     const [hatesC, setHatesC] = useState(nOHates.length)
-
+    
     const targetDate = new Date(dOpublic);
     const currentDate = new Date();
     const differenceInMilliseconds = currentDate - targetDate;
+
+    const targetDateShow = targetDate.toLocaleString('en-GB', {
+        timeZone: 'Europe/Athens',
+      });
     // setDifference(differenceInMilliseconds);
     // const [dateElement, setDateElement] = useEffect();
     let dateElement;
     if(Math.floor(differenceInMilliseconds / 1000 / 60 / 60 / 24) > 0){
-        dateElement = <span className="movieCBot-left-days" title={targetDate}>
+        dateElement = <span className="movieCBot-left-days" title={targetDateShow}>
             {Math.floor(differenceInMilliseconds / 1000 / 60 / 60 / 24)} days ago
         </span>;
     }else if(Math.floor((differenceInMilliseconds / 1000 / 60 / 60) % 24) > 0){
-        dateElement = <span className="movieCBot-left-days" title={targetDate}>
+        dateElement = <span className="movieCBot-left-days" title={targetDateShow}>
             {Math.floor((differenceInMilliseconds / 1000 / 60 / 60) % 24)} hours ago
         </span>;
     }else if(Math.floor((differenceInMilliseconds / 1000 / 60) % 60) > 0){
-        dateElement = <span className="movieCBot-left-days" title={targetDate}>
+        dateElement = <span className="movieCBot-left-days" title={targetDateShow}>
             {Math.floor((differenceInMilliseconds / 1000 / 60) % 60)} minutes ago
         </span>;
     }else{
-        dateElement = <span className="movieCBot-left-days" title={targetDate}>
+        dateElement = <span className="movieCBot-left-days" title={targetDateShow}>
             {Math.floor((differenceInMilliseconds / 1000) % 60)} seconds ago
         </span>;
     }

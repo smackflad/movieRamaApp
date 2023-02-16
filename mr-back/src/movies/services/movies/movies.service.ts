@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreateMovieDto, MovieReactionDto } from 'src/movies/movies.dtos';
 import { Movie } from 'src/typeorm';
-import { Repository } from 'typeorm';
+import { FindOptionsOrderValue, Repository } from 'typeorm';
 
 @Injectable()
 export class MoviesService {
@@ -15,8 +15,15 @@ export class MoviesService {
         return this.movieRepository.save(newMovie);
     }
 
-    getMovies(){
-        return this.movieRepository.find();
+    getMovies(by: number, order: number){
+        var temp: FindOptionsOrderValue = order ? "ASC" : "DESC";
+        if(by === 0){
+            return this.movieRepository.find({order: {datePosted: temp}});
+        }else if(by === 1){
+            return this.movieRepository.find({order: {likes: temp}});
+        }else{
+            return this.movieRepository.find({order: {hates: temp}});
+        }
     }
 
     findMoviesByAuthor(id: number){

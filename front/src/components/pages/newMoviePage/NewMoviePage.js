@@ -39,6 +39,35 @@ const NewMoviePage = () => {
     axios.defaults.headers.common = {}
   }, [])
 
+  const handleSubmit = async (e)=>{
+    e.preventDefault();
+    setIsLoading(true);
+    console.log({title: e.target.title.value,
+      description: e.target.desc.value,
+      author: usr.id,
+      authorName: usr.firstName +" "+ usr.lastName})
+    await axios.post(`http://localhost:3001/movies/create`, {
+      title: e.target.title.value,
+      description: e.target.desc.value,
+      author: usr.id,
+      authorName: usr.firstName +" "+ usr.lastName
+    })
+      .then(res => {
+        
+        setIsLoading(false);
+        navigate("/");
+      })
+      .catch(error =>{
+        // popup error
+        setIsLoading(false);
+      })
+  }
+
+
+
+
+
+
   if(isLoading){
     return (<>
     <div className="newMoviePage-external">
@@ -55,6 +84,18 @@ const NewMoviePage = () => {
 return (
   <div className="newMoviePage-external">
     <NavBar usr={usr}/>
+    <div className="newMoviePage-internal">
+      <form onSubmit={handleSubmit}>
+          <input className="newMoviePage-title" type="txt" id="title" name="title" placeholder="Movie Title" required/>
+          <textarea className="newMoviePage-desc" id="desc" name="desc" placeholder="Some words about the movie" required/>
+          <div className="newMoviePage-submit-container">
+            <motion.input 
+            className="newMoviePage-submit" type="submit" 
+            whileTap={{scale:0.9}}
+            whileHover={{scale:1.05}}/>
+          </div>
+      </form>
+    </div>
   </div>
   );
 };

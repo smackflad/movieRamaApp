@@ -51,6 +51,7 @@
     flex-direction: row;
     justify-content: space-between;
     min-width: 800px;
+    z-index: 1;
 }
 
 @media only screen and (max-width: 900px) {
