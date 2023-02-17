@@ -189,7 +189,7 @@ return (
           </div>
         </motion.div>
         {(isLoading || !seq) ? (
-          <div className="homePage-posts">
+          <div className="homePage-posts-loading">
             <img className="homePage-logo-loading" src={loading} />
           </div>
         ): (

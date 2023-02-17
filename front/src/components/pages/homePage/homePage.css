@@ -134,6 +134,14 @@
 .homePage-posts {
     flex: 1;
     display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-items: center;
+}
+
+.homePage-posts-loading {
+    flex: 1;
+    display: flex;
     justify-content: center;
     flex-direction: column;
     align-items: center;
