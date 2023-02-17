@@ -57,7 +57,7 @@ const refDropdown = useRef(null);
                             {(dropdownIsOpen) &&
                                 <div className="NavBar-top-right-dropdown-list" ref={refDropdown}>
                                     <ul>
-                                        <li>Profile</li>
+                                        <li onClick={()=>{navigate('/profile')}}>Profile</li>
                                         <li onClick={()=>{localStorage.removeItem('accessToken');navigate(0) }}>Logout</li>
                                     </ul>
                                 </div>

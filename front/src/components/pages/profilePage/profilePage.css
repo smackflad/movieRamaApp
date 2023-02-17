@@ -1,0 +1,96 @@
+.profilePage-external{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column ;
+    gap: 55px;
+    align-items: center;
+}
+
+.profilePage-external .profilePage-logo{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.profilePage-external .profilePage-logo .profilePage-logo-loading {
+    min-width: 25px;
+    position: absolute;
+    bottom: 150px;
+}
+
+.profilePage-external > * {
+    margin-top: 10px;
+}
+
+.profilePage-external .profilePage-internal {
+    display: flex;
+    /* width: 100%; */
+    justify-content: center;
+    background-color: white;
+    box-shadow: 0 9px 9px 0 rgb(0 0 0 / 9%), 0 23px 50px 0 rgb(0 0 0 / 34%);
+    display: flex;
+    gap: 50px;
+    flex-direction: column;
+    max-width: max-content;
+    padding: 25px 15px;
+    border-radius: 5px;
+    align-items: center;
+}
+
+.profilePage-external .profilePage-internal form {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+@media only screen and (max-width: 450px) {
+    .profilePage-external .profilePage-internal {
+        max-width: 80%;
+        min-width: unset;
+    }
+}
+
+.profilePage-external .profilePage-internal form .profilePage-inpt {
+    outline: none;
+    border: none;
+    box-shadow: 0 9px 9px 0 rgb(0 0 0 / 9%), 0 23px 50px 0 rgb(0 0 0 / 34%);
+    line-height: 34px;
+    padding: 0px 10px;
+    font-size: 18px;
+    color: #0000009e;
+    border-radius: 5px;
+    width: 90%;
+}
+
+.profilePage-external .profilePage-internal .profilePage-submit-container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.profilePage-external .profilePage-internal .profilePage-submit {
+    /* margin-right: 15px; */
+    background: none;
+    color: #000000b0;
+    border: none;
+    border-radius: 10px;
+    padding: 5px 15px;
+    font: inherit;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    outline: inherit;
+    box-shadow: 0 9px 9px 0 rgb(0 0 0 / 9%), 0 23px 50px 0 rgb(0 0 0 / 34%);
+}
+
+.profilePage-external .profilePage-internal .profilePage-submit:disabled{
+    opacity: 0.7;
+    cursor: default;
+}
