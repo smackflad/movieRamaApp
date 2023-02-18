@@ -1,4 +1,5 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, CreateDateColumn, Entity, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { User } from './user.entity';
 
 @Entity()
 export class Movie {
@@ -26,28 +27,35 @@ export class Movie {
   })
   author: number;
 
-  @Column({
-    nullable: false,
-    unique: false,
-  })
-  authorName: string;
-
   @CreateDateColumn({type: 'timestamp with time zone'})
   datePosted: Date;
 
-  @Column({
-    type: 'int',
-    nullable: false,
+  // @Column({
+  //   type: 'int',
+  //   nullable: false,
+  //   array: true,
+  //   default: []
+  // })
+  // likes: number[];
+  @ManyToMany(() => User)
+  @Column({ 
     array: true,
     default: []
-  })
-  likes: number[];
+   })
+  likes: User[];
 
-  @Column({
-    type: 'int',
-    nullable: false,
+  // @Column({
+  //   type: 'int',
+  //   nullable: false,
+  //   array: true,
+  //   default: []
+  // })
+  // hates: number[];
+
+  @ManyToMany(() => User)
+  @Column({ 
     array: true,
     default: []
-  })
-  hates: number[];
+   })
+  hates: User[];
 }

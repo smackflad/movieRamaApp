@@ -8,15 +8,9 @@ export class CreateMovieDto {
     @IsNotEmpty()
     @IsString()
     description: string;
-
-    @IsNotEmpty()
-    author: number;
 }
 
 export class MovieReactionDto {
-    @IsNotEmpty()
-    user: number;
-
     @IsNotEmpty()
     reaction: number;
 }
