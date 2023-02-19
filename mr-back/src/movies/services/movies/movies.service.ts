@@ -60,44 +60,36 @@ export class MoviesService {
         return query.getMany();
     }
 
-    findMoviesByAuthor(id: number){
-        return this.movieRepository.find({where: {author: id}});
-    }
+    async movieReact(id: number, MovieReactionDto: MovieReactionDto, usr: User){
+        const movie = await this.movieRepository.findOne(
+            {where: {id: id}}
+        );
 
-    async movieReact(id: number, MovieReactionDto: MovieReactionDto, usrId: number){
-        const movie = await this.movieRepository.findOne({where: {id: id}});
-        const likes = movie.likes;
-        const hates = movie.hates;
-        // console.log(movie.likes.includes(usrId))
+
+        if(MovieReactionDto.reaction === 1){
+            let tempL = movie.likes.findIndex((likedUser) => likedUser == usr.id);
+            if(tempL === -1){
+                movie.likes.push(usr.id);
+                let temp = movie.hates.findIndex((hatedUser) => hatedUser == usr.id);
+                if(temp !== -1){
+                    movie.hates.splice(temp, 1);
+                }
+            }else{
+                movie.likes.splice(tempL, 1);
+            }
+        }else if(MovieReactionDto.reaction === 2){
+            let tempH = movie.hates.findIndex((hatedUser) => hatedUser == usr.id);
+            if(tempH === -1){
+                movie.hates.push(usr.id);
+                let temp = movie.likes.findIndex((likedUser) => likedUser == usr.id);
+                if(temp !== -1){
+                    movie.likes.splice(temp, 1);
+                }
+            }else{
+                movie.hates.splice(tempH, 1);
+            }
+        }
         
-        // movie.likes.push(usrId);
-        // console.log(usrId)
-
-        // if (!likes.includes(usrId)) {
-        // }
-        console.log(movie.likes)
-
-        // if(MovieReactionDto.reaction === 1){
-        //     if(!(likes.includes(usrId))){
-        //         likes.push(usrId);
-        //         if((hates.includes(usrId))){
-        //             hates.splice(hates.indexOf(usrId), 1);
-        //         }
-        //     }else{
-        //         likes.splice(likes.indexOf(usrId), 1);
-        //     }
-        // }else if(MovieReactionDto.reaction === 2){
-        //     if(!(hates.includes(usrId))){
-        //         hates.push(usrId);
-        //         if((likes.includes(usrId))){
-        //             likes.splice(likes.indexOf(usrId), 1);
-        //         }
-        //     }else{
-        //         hates.splice(hates.indexOf(usrId), 1);
-        //     }
-        // }
-        
-        // return this.movieRepository.save({...movie, likes, hates});
         return this.movieRepository.save(movie);
     }
 }

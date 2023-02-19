@@ -25,17 +25,11 @@ export class MoviesController {
         return this.movieService.getMovies(by, order);
     }
     
-    @Get('author/:id')
-    getMoviesByAuthor(@Param('id', ParseIntPipe) id: number){
-        // return "this.movieService.findMoviesByAuthor(id)";
-        return this.movieService.findMoviesByAuthor(id);
-    }
-    
     @UseGuards(AuthGuard('jwt'))
     @Patch('react/:id')
     movieReact(@Request() req, @Param('id') id, @Body() MovieReactionDto: MovieReactionDto) {
         // console.log(req.user.id)
-        return this.movieService.movieReact(id, MovieReactionDto, <number>req.user.id);
+        return this.movieService.movieReact(id, MovieReactionDto, req.user);
     }
 
     @UseGuards(AuthGuard('jwt'))
