@@ -15,11 +15,6 @@ export class UsersController {
     return this.userService.getUsers();
   }
   
-  @Get(':id')
-  findUsersById(@Param('id', ParseIntPipe) id: number) {
-    return this.userService.findUsersById(id);
-  }
-  
   @Post('create')
   @UsePipes(ValidationPipe)
   createUsers(@Body() createUserDto: CreateUserDto) {
@@ -32,7 +27,7 @@ export class UsersController {
   }
 
   @UseGuards(AuthGuard('jwt'))
-  @Post('validate')
+  @Get('validate')
   validate(@Request() req) {
     return req.user;
   }

@@ -19,10 +19,6 @@ export class UsersService {
     return this.userRepository.find();
   }
 
-  findUsersById(id: number) {
-    return this.userRepository.findOne({select:{id: true, firstName: true, lastName: true}, where: {id}});
-  }
-
   async findUserExists(userExistsDto: UserExistsDto) {
     const user = await this.userRepository.findOne({where: {email: userExistsDto.email}})
     return user !== null;
