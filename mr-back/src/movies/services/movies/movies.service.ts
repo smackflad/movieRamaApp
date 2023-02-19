@@ -10,53 +10,52 @@ export class MoviesService {
         @InjectRepository(Movie) private readonly movieRepository: Repository<Movie>,
     ){}
 
-    createMovie(id: number, CreateMovieDto: CreateMovieDto){
-        const newMovie = this.movieRepository.create({...CreateMovieDto, author: id});
+    createMovie(usr: User, CreateMovieDto: CreateMovieDto){//TODO create returns movie and all of author except password, make it so it returns only author's name.
+        const newMovie = this.movieRepository.create({...CreateMovieDto, author: usr});
         return this.movieRepository.save(newMovie);
     }
 
-    getMovies(by: number, order: number){
+    async getMovies(by: number, order: number){
         var temp: FindOptionsOrderValue = order ? "ASC" : "DESC";
+
+        let query = this.movieRepository.createQueryBuilder("movie")
+        .leftJoinAndSelect("movie.author", "user")
+        .select(['user.firstName', 'user.lastName', 'movie'])
+        .andWhere('movie.author = user.id');
+
         if(by === 0){
-            return this.movieRepository.find({order: {datePosted: temp}});
+            query.orderBy("movie.datePosted", temp)
         }else if(by === 1){
-            return this.movieRepository.createQueryBuilder("movie")
-            .leftJoinAndSelect("movie.likes", "user")
-            .orderBy("ARRAY_LENGTH(movie.likes)", temp)
-            .getMany();
+            query.orderBy("movie.likes", temp)
         }else{
-            return this.movieRepository.createQueryBuilder("movie")
-            .leftJoinAndSelect("movie.hates", "user")
-            .orderBy("ARRAY_LENGTH(movie.hates)", temp)
-            .getMany();
+            query.orderBy("movie.likes", temp)
         }
+        return query.getMany();
     }
 
     getMoviesUser(by: number, order: number, user: User, m: number){
-        console.log(user)
         var temp: FindOptionsOrderValue = order ? "ASC" : "DESC";
         var query = this.movieRepository.createQueryBuilder("movie")
-        // .leftJoinAndSelect("", "movie.likes", "movie.hates", "user");
+        .leftJoinAndSelect("movie.author", "user")
+        .select(['user.firstName', 'user.lastName', 'movie'])
         
         if(m === 1){
             //posts by user
             query.where("movie.author = :userId", { userId: user.id })
         }else if(m === 2){
-            //return posts created from last login
+            //TODO: return posts created from last login
             // tempp = {author: user.id};
         }
         
+        query.andWhere('movie.author = user.id');
+        
         if(by === 0){
-            // tempOrd ={datePosted: temp}
-            query.orderBy("datePosted", temp)
+            query.orderBy("movie.datePosted", temp)
         }else if(by === 1){
-            // tempOrd ={likes: temp}
-            query.orderBy("ARRAY_LENGTH(movie.likes)", temp)
+            query.orderBy("movie.likes", temp)
         }else{
-            // tempOrd ={hates: temp};
-            query.orderBy("ARRAY_LENGTH(movie.hates)", temp)
+            query.orderBy("movie.hates", temp)
         }
-        // return this.movieRepository.find({where: tempp, order: tempOrd});
         return query.getMany();
     }
 
@@ -64,7 +63,6 @@ export class MoviesService {
         const movie = await this.movieRepository.findOne(
             {where: {id: id}}
         );
-
 
         if(MovieReactionDto.reaction === 1){
             let tempL = movie.likes.findIndex((likedUser) => likedUser == usr.id);

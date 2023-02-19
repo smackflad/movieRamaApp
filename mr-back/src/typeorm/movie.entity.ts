@@ -1,4 +1,5 @@
-import { Column, CreateDateColumn, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, CreateDateColumn, Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { User } from './user.entity';
 
 @Entity()
 export class Movie {
@@ -20,11 +21,15 @@ export class Movie {
   })
   description: string;
 
-  @Column({
-    nullable: false,
-    unique: false,
-  })
-  author: number;
+  // @Column({
+  //   nullable: false,
+  //   unique: false,
+  // })
+  // author: number;
+
+  @ManyToOne(() => User, user => user.id)
+  @JoinColumn({ name: "author" })
+  author: User;
 
   @CreateDateColumn({type: 'timestamp with time zone'})
   datePosted: Date;

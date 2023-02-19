@@ -20,7 +20,7 @@ export class UsersService {
   }
 
   findUsersById(id: number) {
-    return this.userRepository.findOne({where: {id}});
+    return this.userRepository.findOne({select:{id: true, firstName: true, lastName: true}, where: {id}});
   }
 
   async findUserExists(userExistsDto: UserExistsDto) {

@@ -36,6 +36,6 @@ export class MoviesController {
     @Post('create')
     // @UsePipes(ValidationPipe)
     createMovie(@Request() req, @Body() CreateMovieDto: CreateMovieDto) {
-        return this.movieService.createMovie(req.user.id, CreateMovieDto);
+        return this.movieService.createMovie(req.user, CreateMovieDto);
     }
 }
