@@ -33,7 +33,7 @@ const ProfilePage = () => {
     const token= localStorage.getItem('accessToken');
     if(token){
       axios.defaults.headers.common = {'Authorization': `Bearer ${token}`}
-      axios.post(`http://localhost:3001/users/validate`)
+      axios.get(`http://localhost:3001/users/validate`)
       .then(res => {
         setUsr(res.data);
         setIsLoading(false);

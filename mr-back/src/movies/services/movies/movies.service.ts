@@ -28,7 +28,7 @@ export class MoviesService {
         }else if(by === 1){
             query.orderBy("movie.likes", temp)
         }else{
-            query.orderBy("movie.likes", temp)
+            query.orderBy("movie.hates", temp)
         }
         return query.getMany();
     }

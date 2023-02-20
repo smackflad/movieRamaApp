@@ -25,7 +25,7 @@ const NewMoviePage = () => {
     const token= localStorage.getItem('accessToken');
     if(token){
       axios.defaults.headers.common = {'Authorization': `Bearer ${token}`}
-      axios.post(`http://localhost:3001/users/validate`)
+      axios.get(`http://localhost:3001/users/validate`)
       .then(res => {
         setUsr(res.data);
         setIsLoading(false);
@@ -42,25 +42,24 @@ const NewMoviePage = () => {
   const handleSubmit = async (e)=>{
     e.preventDefault();
     setIsLoading(true);
-    console.log({title: e.target.title.value,
-      description: e.target.desc.value,
-      author: usr.id,
-      authorName: usr.firstName +" "+ usr.lastName})
-    await axios.post(`http://localhost:3001/movies/create`, {
-      title: e.target.title.value,
-      description: e.target.desc.value,
-      author: usr.id,
-      authorName: usr.firstName +" "+ usr.lastName
-    })
-      .then(res => {
-        
-        setIsLoading(false);
-        navigate("/");
+
+    const token= localStorage.getItem('accessToken');
+    if(token){
+      axios.defaults.headers.common = {'Authorization': `Bearer ${token}`}
+      await axios.post(`http://localhost:3001/movies/create`, {
+        title: e.target.title.value,
+        description: e.target.desc.value,
       })
-      .catch(error =>{
-        // popup error
-        setIsLoading(false);
-      })
+        .then(res => {
+          
+          setIsLoading(false);
+          navigate("/");
+        })
+        .catch(error =>{
+          // popup error
+          setIsLoading(false);
+        })
+    }
   }
 
 

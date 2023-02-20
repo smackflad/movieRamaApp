@@ -11,17 +11,18 @@ const MovieComponent = ({usr, id, title, desc, nOuser, dOpublic, nOlikes, nOHate
     const [hasReaction, setHasReaction] = useState(0);
     const [isBool, setIsBool] = useState(false);
 
-    // console.log("test: ", anim)
-
     const react = (reaction) =>{
-        axios.patch(`http://localhost:3001/movies/react/${id}`, {
-            user: parseInt(usr.id),
-            reaction: reaction
-        })
-    .catch(error => {
-      return false
-    })
-    return true;
+        const token= localStorage.getItem('accessToken');
+        if(token){
+            axios.defaults.headers.common = {'Authorization': `Bearer ${token}`}
+            axios.patch(`http://localhost:3001/movies/react/${id}`, {
+                reaction: reaction
+            })
+            .catch(error => {
+                return false
+            })
+                return true;
+        }
     }
 
     const [likesC, setLikesC] = useState(nOlikes.length)
@@ -34,8 +35,7 @@ const MovieComponent = ({usr, id, title, desc, nOuser, dOpublic, nOlikes, nOHate
     const targetDateShow = targetDate.toLocaleString('en-GB', {
         timeZone: 'Europe/Athens',
       });
-    // setDifference(differenceInMilliseconds);
-    // const [dateElement, setDateElement] = useEffect();
+      
     let dateElement;
     if(Math.floor(differenceInMilliseconds / 1000 / 60 / 60 / 24) > 0){
         dateElement = <span className="movieCBot-left-days" title={targetDateShow}>

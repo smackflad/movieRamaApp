@@ -20,6 +20,7 @@ const HomePage = () => {
   const [seq, setSeq] = useState(false);
 
   const [by, setBy] = useState(0);
+  const [m, setM] = useState(0);
   const [order, setOrder] = useState(0);
   const [orderTxt, setOrderTxt] = useState("Date");
 
@@ -53,7 +54,7 @@ const HomePage = () => {
     const token= localStorage.getItem('accessToken');
     if(token){
       axios.defaults.headers.common = {'Authorization': `Bearer ${token}`}
-      axios.post(`http://localhost:3001/users/validate`)
+      axios.get(`http://localhost:3001/users/validate`)
       .then(res => {
         setUsr(res.data);
         setLoggedIn(true);
@@ -71,23 +72,45 @@ const HomePage = () => {
     if(moviesArrayTemp.length !== 0){
       setFirstLoad(1);
     }
-    setIsLoading(true);
-    axios.defaults.headers.common = {}
-    axios.get(`http://localhost:3001/movies/`+by+`/0`)
-    .then(res => {
-      setMoviesArrayTemp(res.data)
-      // setUsr(res.data);
-      // setLoggedIn(true);
-      setIsLoading(false);
-      sequence();
-    })
-    .catch(error =>{
-      // localStorage.clear('accessToken');
-      setIsLoading(false);
-      // setLoggedIn(false);
-      sequence();
-    })
-  }, [by])
+    if(loggedIn){
+      setIsLoading(true);
+      const token= localStorage.getItem('accessToken');
+      if(token){
+        axios.defaults.headers.common = {'Authorization': `Bearer ${token}`}
+        axios.get(`http://localhost:3001/movies/`+by+`/0/`+m)
+        .then(res => {
+          setMoviesArrayTemp(res.data)
+          // setUsr(res.data);
+          // setLoggedIn(true);
+          setIsLoading(false);
+          sequence();
+        })
+        .catch(error =>{
+          // localStorage.clear('accessToken');
+          setIsLoading(false);
+          // setLoggedIn(false);
+          sequence();
+        })
+      }
+    }else{
+      setIsLoading(true);
+      axios.defaults.headers.common = {}
+      axios.get(`http://localhost:3001/movies/`+by+`/0`)
+      .then(res => {
+        setMoviesArrayTemp(res.data)
+        // setUsr(res.data);
+        // setLoggedIn(true);
+        setIsLoading(false);
+        sequence();
+      })
+      .catch(error =>{
+        // localStorage.clear('accessToken');
+        setIsLoading(false);
+        // setLoggedIn(false);
+        sequence();
+      })
+    }
+  }, [by, m])
 
 
 
@@ -160,10 +183,10 @@ return (
         <NavBar usr={usr}/>
         <motion.div variants={item} className="homePage-NavBar-bot">
           <div className="homePage-NavBar-bot-left">
-              <button>All Posts</button>
+              <button onClick={()=>{setM(0);}}>All Posts</button>
               <button>New Posts</button>
               {(loggedIn) &&
-                  <button>My Posts</button>
+                  <button onClick={()=>{setM(1);}}>My Posts</button>
               }
           </div>
           <div className="homePage-NavBar-bot-right">
@@ -202,7 +225,7 @@ return (
                 id={mv.id}
                 title={mv.title}
                 desc={mv.description}
-                nOuser={mv.authorName}
+                nOuser={mv.author.firstName+' '+mv.author.lastName}
                 dOpublic={mv.datePosted}
                 nOlikes={mv.likes}
                 nOHates={mv.hates}
