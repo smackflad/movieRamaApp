@@ -77,7 +77,8 @@
 
 .profilePage-external .profilePage-internal .profilePage-submit {
     /* margin-right: 15px; */
-    background: none;
+    background: rgb(241, 241, 241);
+    z-index: 1;
     color: #000000b0;
     border: none;
     border-radius: 10px;

@@ -48,6 +48,7 @@ const ProfilePage = () => {
         setIsLoading(false);
       })
       .catch(error =>{
+        console.log(error)
         navigate('/');
       })
     }else{
@@ -59,21 +60,46 @@ const ProfilePage = () => {
   const handleSubmit = async (e)=>{
     e.preventDefault();
     setIsLoading(true);
-    await axios.post(`http://localhost:3001/users/update`, {
-      title: e.target.title.value,
-      description: e.target.desc.value,
-      author: usr.id,
-      authorName: usr.firstName +" "+ usr.lastName
-    })
+    const token= localStorage.getItem('accessToken');
+    if(token){
+      axios.defaults.headers.common = {'Authorization': `Bearer ${token}`}
+      await axios.post(`http://localhost:3001/users/update`, {
+        firstName: firstName,
+        lastName: lastName
+      })
       .then(res => {
         
         setIsLoading(false);
-        navigate("/");
+        navigate(0);
       })
       .catch(error =>{
         // popup error
+        console.log(error)
         setIsLoading(false);
       })
+    }
+  }
+
+  const handleSubmitPassword = async (e)=>{
+    e.preventDefault();
+    setIsLoading(true);
+    const token= localStorage.getItem('accessToken');
+    if(token){
+      axios.defaults.headers.common = {'Authorization': `Bearer ${token}`}
+      await axios.post(`http://localhost:3001/users/updatePassword`, {
+        password: oldPasswd,
+        newPassword: newPasswd
+      })
+      .then(res => {
+        setIsLoading(false);
+        navigate(0);
+      })
+      .catch(error =>{
+        // popup error
+        console.log(error)
+        setIsLoading(false);
+      })
+    }
   }
 
 
@@ -133,7 +159,7 @@ return (
         whileHover={{scale:1.05}} />
       </div>
     </form>
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmitPassword}>
       <CustomTextBox 
         keyy="oldPass"
         name="oldPass"
@@ -145,8 +171,8 @@ return (
         type="password"
       />
       <CustomTextBox 
-        keyy="regRepPass"
-        name="repPass"
+        keyy="newPass"
+        name="newPass"
         disabled={false}
         value={newPasswd}
         change={(e)=>{setNewPasswd(e.target.value);if(!(e.target.value)){setRepPasswd("");setRegPasswdErr(false)}}}
@@ -156,31 +182,38 @@ return (
         type="password"
       />
       <CustomTextBox 
-        keyy="regRepPass"
-        name="repPass"
+        keyy="repnewPass"
+        name="repnewPass"
         disabled={!newPasswd}
         value={repPasswd}
-        change={(e)=>{setRepPasswd(e.target.value)}}
-        isError={regPasswdErr}
-        errorMessage="Passwords do not match"
-        placeholder="Repeat New Password"
-        type="password"
-        blur={(e)=>{
-            if(e.target.value !== "")
+        change={(e)=>{
+          setRepPasswd(e.target.value)
             if(e.target.value !== newPasswd){
               setRegPasswdErr(true)
             }else{
               setRegPasswdErr(false)
             }
-          }
-        }
+        }}
+        isError={regPasswdErr}
+        errorMessage="Passwords do not match"
+        placeholder="Repeat New Password"
+        type="password"
+        // blur={(e)=>{
+        //     if(e.target.value !== "")
+        //     if(e.target.value !== newPasswd){
+        //       setRegPasswdErr(true)
+        //     }else{
+        //       setRegPasswdErr(false)
+        //     }
+        //   }
+        // }
       />
           <div className="profilePage-submit-container">
             <motion.input 
             className="profilePage-submit" type="submit" value="Update Password"
-            disabled={!newPasswd}
-            whileTap={(newPasswd) ? {scale:0.9} : {}}
-            whileHover={(newPasswd) ? {scale:1.05} : {}} />
+            disabled={(!repPasswd) || regPasswdErr }
+            whileTap={!((!repPasswd) || regPasswdErr) ? {scale:0.9} : {}}
+            whileHover={!((!repPasswd) || regPasswdErr) ? {scale:1.05} : {}} />
           </div>
       </form>
     </div>
