@@ -9,6 +9,7 @@ export class AuthService {
   async signPayload(payload: any) {
     const user = await this.usersService.findUserByEmail(payload.email)
     if(user.password === payload.password){
+        await this.usersService.updateUserLastLogin(payload.email);
         const accessToken = this.jwtService.sign(payload);
         return {
           expiresIn: 3600,

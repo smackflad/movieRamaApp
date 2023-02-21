@@ -183,10 +183,12 @@ return (
         <NavBar usr={usr}/>
         <motion.div variants={item} className="homePage-NavBar-bot">
           <div className="homePage-NavBar-bot-left">
-              <button onClick={()=>{setM(0);}}>All Posts</button>
-              <button>New Posts</button>
               {(loggedIn) &&
+                <>
+                  <button onClick={()=>{setM(0);}}>All Posts</button>
+                  <button onClick={()=>{setM(2);}}>New Posts</button>
                   <button onClick={()=>{setM(1);}}>My Posts</button>
+                </>
               }
           </div>
           <div className="homePage-NavBar-bot-right">

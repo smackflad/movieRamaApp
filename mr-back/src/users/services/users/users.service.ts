@@ -11,7 +11,7 @@ export class UsersService {
   ) {}
 
   createUser(createUserDto: CreateUserDto) {
-    const newUser = this.userRepository.create(createUserDto);
+    const newUser = this.userRepository.create({...createUserDto, currLogin: new Date()});
     return this.userRepository.save(newUser);
   }
   
@@ -26,6 +26,16 @@ export class UsersService {
 
   async findUserByEmail(email: string) {
     const user = await this.userRepository.findOne({where: {email: email}})
+    return user;
+  }
+
+  async updateUserLastLogin(email: string) {
+    const user = await this.userRepository.findOne({where: {email: email}})
+    if(user.currLogin){
+      user.lastLogIn = user.currLogin;
+    }
+    user.currLogin = new Date();
+    await this.userRepository.save(user);
     return user;
   }
 }

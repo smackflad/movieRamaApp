@@ -41,4 +41,9 @@ export class User {
   })
   password: string;
 
+  @Column({ type: 'timestamp with time zone', default: () => 'CURRENT_TIMESTAMP' })
+  lastLogIn: Date;
+  @Column({ type: 'timestamp with time zone', default: () => 'CURRENT_TIMESTAMP' })
+  currLogin: Date;
+
 }

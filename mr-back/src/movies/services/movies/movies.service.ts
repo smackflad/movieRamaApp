@@ -43,8 +43,7 @@ export class MoviesService {
             //posts by user
             query.where("movie.author = :userId", { userId: user.id })
         }else if(m === 2){
-            //TODO: return posts created from last login
-            // tempp = {author: user.id};
+            query.where("movie.datePosted > :lastLogin", {lastLogin: user.lastLogIn})
         }
         
         query.andWhere('movie.author = user.id');

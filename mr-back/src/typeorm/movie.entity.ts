@@ -33,6 +33,7 @@ export class Movie {
 
   @CreateDateColumn({type: 'timestamp with time zone'})
   datePosted: Date;
+  
 
   @Column('int', {
     array: true,
