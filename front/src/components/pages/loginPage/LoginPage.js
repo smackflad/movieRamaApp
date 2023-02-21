@@ -21,6 +21,7 @@ const LoginPage = () => {
   const [emailDisabled, setEmailDisabled] = useState(false);
 
   const [regPasswd, setRegPasswd] = useState("");
+  const [regRepPasswd, setRegRepPasswd] = useState("");
   const [regPasswdErr, setRegPasswdErr] = useState(false);
 
   const initLogo = {
@@ -273,21 +274,29 @@ return (
               required={true}
               isError={false}
               value={regPasswd}
-              change={(e)=>{setRegPasswd(e.target.value)}}
+              change={(e)=>{
+                setRegPasswd(e.target.value)
+                if(e.target.value === ""){
+                  setRegPasswdErr(false);
+                  setRegRepPasswd("")
+                }
+              }}
               placeholder="Password"
               type="password"
               />
               <CustomTextBox 
               keyy="regRepPass"
               name="repPass"
-              disabled={false}
+              disabled={!regPasswd}
               required={true}
               isError={regPasswdErr}
+              value={regRepPasswd}
               errorMessage="Passwords do not match"
               placeholder="Repeat Password"
               type="password"
-              blur={(e)=>{
-                  console.log(regPasswd);
+              change={(e)=>{
+                  // console.log(regPasswd);
+                  setRegRepPasswd(e.target.value)
                   if(e.target.value !== regPasswd){
                     setRegPasswdErr(true)
                   }else{

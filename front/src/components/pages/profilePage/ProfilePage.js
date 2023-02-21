@@ -198,15 +198,6 @@ return (
         errorMessage="Passwords do not match"
         placeholder="Repeat New Password"
         type="password"
-        // blur={(e)=>{
-        //     if(e.target.value !== "")
-        //     if(e.target.value !== newPasswd){
-        //       setRegPasswdErr(true)
-        //     }else{
-        //       setRegPasswdErr(false)
-        //     }
-        //   }
-        // }
       />
           <div className="profilePage-submit-container">
             <motion.input 
