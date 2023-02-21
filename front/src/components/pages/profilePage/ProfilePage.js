@@ -23,9 +23,15 @@ const ProfilePage = () => {
   const [email, setEmail] = useState("");
   const [emailDisabled, setEmailDisabled] = useState(false);
 
+  const [oldPasswd, setOldPasswd] = useState("");
   const [passwd, setPasswd] = useState("");
+  const [newPasswd, setNewPasswd] = useState("");
   const [repPasswd, setRepPasswd] = useState("");
+
   const [regPasswdErr, setRegPasswdErr] = useState(false);
+
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
 
 
   useEffect(()=>{
@@ -36,6 +42,9 @@ const ProfilePage = () => {
       axios.get(`http://localhost:3001/users/validate`)
       .then(res => {
         setUsr(res.data);
+        setEmail(res.data.email)
+        setFirstName(res.data.firstName)
+        setLastName(res.data.lastName)
         setIsLoading(false);
       })
       .catch(error =>{
@@ -50,11 +59,7 @@ const ProfilePage = () => {
   const handleSubmit = async (e)=>{
     e.preventDefault();
     setIsLoading(true);
-    console.log({title: e.target.title.value,
-      description: e.target.desc.value,
-      author: usr.id,
-      authorName: usr.firstName +" "+ usr.lastName})
-    await axios.post(`http://localhost:3001/movies/create`, {
+    await axios.post(`http://localhost:3001/users/update`, {
       title: e.target.title.value,
       description: e.target.desc.value,
       author: usr.id,
@@ -97,7 +102,7 @@ return (
       <CustomTextBox 
         keyy="email"
         name="email"
-        disabled={emailDisabled}
+        disabled={true}
         isError={false}
         placeholder="Email"
         change={(e)=>{setEmail(e.target.value)}}
@@ -109,6 +114,8 @@ return (
         disabled={false}
         isError={false}
         placeholder="First Name"
+        value={firstName}
+        change={(e)=>{setFirstName(e.target.value)}}
       />
       <CustomTextBox 
         keyy="lName"
@@ -116,37 +123,51 @@ return (
         disabled={false}
         isError={false}
         placeholder="Last Name"
+        value={lastName}
+        change={(e)=>{setLastName(e.target.value)}}
       />
-          <div className="profilePage-submit-container">
-            <motion.input 
-            className="profilePage-submit" type="submit" value="Update"
-            whileTap={{scale:0.9}}
-            whileHover={{scale:1.05}} />
-          </div>
-      </form>
+      <div className="profilePage-submit-container">
+        <motion.input 
+        className="profilePage-submit" type="submit" value="Update"
+        whileTap={{scale:0.9}}
+        whileHover={{scale:1.05}} />
+      </div>
+    </form>
     <form onSubmit={handleSubmit}>
       <CustomTextBox 
-        keyy="regPass"
-        name="password"
+        keyy="oldPass"
+        name="oldPass"
         disabled={false}
         isError={false}
-        value={passwd}
-        change={(e)=>{setPasswd(e.target.value)}}
+        value={oldPasswd}
+        change={(e)=>{setOldPasswd(e.target.value)}}
         placeholder="Password"
         type="password"
       />
       <CustomTextBox 
         keyy="regRepPass"
         name="repPass"
-        disabled={!passwd}
+        disabled={false}
+        value={newPasswd}
+        change={(e)=>{setNewPasswd(e.target.value);if(!(e.target.value)){setRepPasswd("");setRegPasswdErr(false)}}}
+        isError={false}
+        errorMessage="Passwords do not match"
+        placeholder="New Password"
+        type="password"
+      />
+      <CustomTextBox 
+        keyy="regRepPass"
+        name="repPass"
+        disabled={!newPasswd}
         value={repPasswd}
         change={(e)=>{setRepPasswd(e.target.value)}}
         isError={regPasswdErr}
         errorMessage="Passwords do not match"
-        placeholder="Repeat Password"
+        placeholder="Repeat New Password"
         type="password"
         blur={(e)=>{
-            if(e.target.value !== passwd){
+            if(e.target.value !== "")
+            if(e.target.value !== newPasswd){
               setRegPasswdErr(true)
             }else{
               setRegPasswdErr(false)
@@ -157,9 +178,9 @@ return (
           <div className="profilePage-submit-container">
             <motion.input 
             className="profilePage-submit" type="submit" value="Update Password"
-            disabled={!passwd}
-            whileTap={(passwd) ? {scale:0.9} : {}}
-            whileHover={(passwd) ? {scale:1.05} : {}} />
+            disabled={!newPasswd}
+            whileTap={(newPasswd) ? {scale:0.9} : {}}
+            whileHover={(newPasswd) ? {scale:1.05} : {}} />
           </div>
       </form>
     </div>

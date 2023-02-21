@@ -1,7 +1,7 @@
-import { Injectable } from '@nestjs/common';
+import { ForbiddenException, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from 'src/typeorm';
-import { CreateUserDto, UserExistsDto, LoginUserDto } from 'src/users/users.dtos';
+import { CreateUserDto, UserExistsDto, LoginUserDto, UpdateUserDto, UsersPassUpdateDto } from 'src/users/users.dtos';
 import { Repository } from 'typeorm';
 
 @Injectable()
@@ -37,5 +37,34 @@ export class UsersService {
     user.currLogin = new Date();
     await this.userRepository.save(user);
     return user;
+  }
+
+  async usersUpdate(usr: User, updateUserDto: UpdateUserDto){
+    const user = await this.userRepository.findOne({where: {id: usr.id}})
+    .catch((er)=>{
+      throw new NotFoundException();
+    });
+    user.firstName = updateUserDto.firstName
+    user.lastName = updateUserDto.lastName
+    await this.userRepository.save(user).catch((er) =>{
+      throw new ForbiddenException();
+    });
+    return true;
+  }
+
+  async usersPassUpdate(usr: User, usersPassUpdateDto: UsersPassUpdateDto){
+    const user = await this.userRepository.findOne({where: {id: usr.id}})
+    .catch((er)=>{
+      throw new NotFoundException();
+    });
+    if(user.password === usersPassUpdateDto.password){
+      user.password = usersPassUpdateDto.newPassword;
+    }else{
+      throw new UnauthorizedException();
+    }
+    await this.userRepository.save(user).catch((er) =>{
+      throw new ForbiddenException();
+    });
+    return true;
   }
 }
