@@ -3,15 +3,17 @@ import mainLogo from "./../../../imgs/logoc.png";
 import NavBar from "../homePage/components/navBar/NavBar";
 import loading from "./../../../imgs/loading.svg";
 
-import { useEffect, useRef } from "react";
+import { useContext, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import 'animate.css';
 import { useAnimation, motion } from "framer-motion";
 import axios from 'axios';
 import CustomTextBox from "./customTextBox/CustomTextBox";
+import AppContext from "../../../AppContext";
 
 const ProfilePage = () => {
+  const { handleButtonClick } = useContext(AppContext);
   let navigate = useNavigate();  
 
   // const accessToken = localStorage.getItem('accessToken');
@@ -68,13 +70,11 @@ const ProfilePage = () => {
         lastName: lastName
       })
       .then(res => {
-        
         setIsLoading(false);
         navigate(0);
       })
       .catch(error =>{
-        // popup error
-        console.log(error)
+        handleButtonClick(0);
         setIsLoading(false);
       })
     }
@@ -96,6 +96,9 @@ const ProfilePage = () => {
       })
       .catch(error =>{
         // popup error
+        if(error.response){
+          handleButtonClick(3)
+        }
         console.log(error)
         setIsLoading(false);
       })

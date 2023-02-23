@@ -1,6 +1,8 @@
 .homePage-external{
     width: 100%;
     height: 100%;
+    /* display: flex; */
+    /* justify-content: center; */
 }
 
 .homePage-external .homePage-logo{

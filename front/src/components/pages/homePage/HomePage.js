@@ -4,15 +4,18 @@ import MovieComponent from "./components/movieComponent/MovieComponent";
 import NavBar from "./components/navBar/NavBar";
 import loading from "./../../../imgs/loading.svg";
 
-import { useEffect, useRef } from "react";
+import { useContext, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import 'animate.css';
 import { useAnimation, motion, delay } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import axios from 'axios';
+import AppContext from '../../../AppContext';
+
 
 const HomePage = () => {
+  const { handleButtonClick } = useContext(AppContext);
   let navigate = useNavigate();
 
 
@@ -86,6 +89,11 @@ const HomePage = () => {
           sequence();
         })
         .catch(error =>{
+          if(error.response){
+
+          }else if(error.request){
+            handleButtonClick(0);
+          }
           // localStorage.clear('accessToken');
           setIsLoading(false);
           // setLoggedIn(false);
@@ -104,6 +112,11 @@ const HomePage = () => {
         sequence();
       })
       .catch(error =>{
+        if(error.response){
+
+        }else if(error.request){
+          handleButtonClick(0);
+        }
         // localStorage.clear('accessToken');
         setIsLoading(false);
         // setLoggedIn(false);

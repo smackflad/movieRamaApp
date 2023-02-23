@@ -3,16 +3,18 @@ import mainLogo from "./../../../imgs/logoflat.png";
 import mainLogoC from "./../../../imgs/logoc.png";
 import loading from "./../../../imgs/loading.svg";
 
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useAnimation, motion, delay, AnimatePresence } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import axios from 'axios';
 import CustomTextBox from "../../generalComponents/customTextBox/CustomTextBox";
-import PopupMessage from "../../generalComponents/popupMessage/PopupMessage";
+import AppContext from "../../../AppContext";
 
 const LoginPage = () => {
+  const { handleButtonClick } = useContext(AppContext);
+
   let navigate = useNavigate();
   const [isLogin, setIsLogin] = useState(false);
   const [isRegister, setIsRegister] = useState(false);
@@ -25,17 +27,6 @@ const LoginPage = () => {
   const [regRepPasswd, setRegRepPasswd] = useState("");
   const [regPasswdErr, setRegPasswdErr] = useState(false);
 
-  const [popup, setPopup] = useState(0);
-  const [showNotification, setShowNotification] = useState(false);
-
-  const handleButtonClick = (pp) => {
-    setPopup(pp)
-    setShowNotification(true);
-  };
-
-  const handleNotificationClose = () => {
-    setShowNotification(false);
-  };
 
   const initLogo = {
     show: {
@@ -63,6 +54,14 @@ const LoginPage = () => {
         }
         setIsLoading(false);
       })
+    .catch(error =>{
+      if(error.response){
+      }else if(error.request){
+        handleButtonClick(0)
+        setIsLoading(false)
+      }
+      setEmailDisabled(false);
+    })
   }
 
   const handleLogin = async (e)=>{
@@ -78,8 +77,15 @@ const LoginPage = () => {
         navigate("/")
       })
       .catch(error =>{
-        // email or password dosent match
-        handleButtonClick(1);
+      console.log(error.request)
+        console.log(error.response.status)
+        if(error.response.status === 401){
+          handleButtonClick(1);
+        }else if(error.response.status === 404){
+          handleButtonClick(2);
+        }else{
+          handleButtonClick(0);
+        }
         setIsLoading(false);
       })
   }
@@ -105,6 +111,7 @@ const LoginPage = () => {
           setIsLoading(false);
         })
         .catch(error =>{
+          handleButtonClick(0);
           setEmail("");
           setEmailDisabled(false);
           setIsLogin(false);
@@ -340,9 +347,6 @@ return (
         </div>
       </div>
     </div>
-    {showNotification &&(
-      <PopupMessage  message={popup} onTimeout={handleNotificationClose}/>
-    )}
   </div>
   );
 };

@@ -108,14 +108,17 @@ const PopupMessage = ({message, onTimeout}) => {
                           <span className="popupMessage-error">
                               error
                           </span>
+                          {message === 0 &&
+                              <span>Internal server error</span>
+                          }
                           {message === 1 &&
                               <span>The email or password dosen't match</span>
                           }
                           {message === 2 &&
-                              <span>Auth error</span>
+                              <span>User does not exist</span>
                           }
                           {message === 3 &&
-                              <span>Bad request</span>
+                              <span>Old password dosen't match</span>
                           }
                       </div>
           </motion.div>

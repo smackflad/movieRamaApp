@@ -1,12 +1,14 @@
 import "./movieComponent.css";
-import { useEffect, useRef } from "react";
+import { useContext, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import 'animate.css'
 import { useAnimation, motion, delay, AnimatePresence, useInView } from "framer-motion";
 import axios from 'axios';
+import AppContext from "../../../../../AppContext";
 
 const MovieComponent = ({usr, id, title, desc, nOuser, dOpublic, nOlikes, nOHates, anim}) => {
+    const { handleButtonClick } = useContext(AppContext);
     let navigate = useNavigate();
     const [hasReaction, setHasReaction] = useState(0);
     const [isBool, setIsBool] = useState(false);
@@ -19,6 +21,7 @@ const MovieComponent = ({usr, id, title, desc, nOuser, dOpublic, nOlikes, nOHate
                 reaction: reaction
             })
             .catch(error => {
+                handleButtonClick(0)
                 return false
             })
                 return true;

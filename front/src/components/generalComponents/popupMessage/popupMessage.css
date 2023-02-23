@@ -5,6 +5,7 @@
     background-color: white;
     position: absolute;
     bottom: 35px;
+    z-index: 99999;
 }
 
 .popupMessage-external:hover{

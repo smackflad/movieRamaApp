@@ -9,6 +9,9 @@
   /* -moz-animation: Gradient 15s ease infinite; */
   /* animation: Gradient 15s ease infinite; */
   background-color: #2f79ecab;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
   }
 
 .paused {
