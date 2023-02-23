@@ -10,6 +10,7 @@ import { useAnimation, motion, delay, AnimatePresence } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import axios from 'axios';
 import CustomTextBox from "../../generalComponents/customTextBox/CustomTextBox";
+import PopupMessage from "../../generalComponents/popupMessage/PopupMessage";
 
 const LoginPage = () => {
   let navigate = useNavigate();
@@ -23,6 +24,18 @@ const LoginPage = () => {
   const [regPasswd, setRegPasswd] = useState("");
   const [regRepPasswd, setRegRepPasswd] = useState("");
   const [regPasswdErr, setRegPasswdErr] = useState(false);
+
+  const [popup, setPopup] = useState(0);
+  const [showNotification, setShowNotification] = useState(false);
+
+  const handleButtonClick = (pp) => {
+    setPopup(pp)
+    setShowNotification(true);
+  };
+
+  const handleNotificationClose = () => {
+    setShowNotification(false);
+  };
 
   const initLogo = {
     show: {
@@ -66,6 +79,7 @@ const LoginPage = () => {
       })
       .catch(error =>{
         // email or password dosent match
+        handleButtonClick(1);
         setIsLoading(false);
       })
   }
@@ -326,6 +340,9 @@ return (
         </div>
       </div>
     </div>
+    {showNotification &&(
+      <PopupMessage  message={popup} onTimeout={handleNotificationClose}/>
+    )}
   </div>
   );
 };
