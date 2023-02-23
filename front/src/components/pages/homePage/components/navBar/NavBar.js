@@ -50,7 +50,8 @@ const refDropdown = useRef(null);
                         <div className="NavBar-top-right-dropdown">
                             <div ref={refDropdownbtn} className="NavBar-top-right-dropdown-btn" onClick={()=>{setDropdownIsOpen(!dropdownIsOpen)}}>
                                 <span>Welcome back, {firstName}</span>
-                                <span className="material-symbols-outlined">
+                                <span className="NavBar-top-right-dropdown-icon">
+                                {/* <span className="material-symbols-outlined"> */}
                                     account_circle
                                 </span>
                             </div>
