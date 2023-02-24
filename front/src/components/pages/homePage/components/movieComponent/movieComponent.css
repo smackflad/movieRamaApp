@@ -23,6 +23,10 @@
     border-radius: 5px;
 }
 
+.MovieComponent-external .MovieComponent-internal .movieC-top{
+    text-align: center !important;
+}
+
 .MovieComponent-external .MovieComponent-internal .movieC-middle {
     width: 100%;
 }
@@ -111,6 +115,24 @@
     align-items: center;
     position: relative;
     gap: 10px;
+}
+.movieC-bottom .movieCBot-left .movieCBot-left-txt{
+    /* display: inline-block; */
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3px;
+}
+.movieC-bottom .movieCBot-left .movieCBot-left-txt span {
+   white-space: nowrap;
+
+}
+
+@media only screen and (max-width: 480px) {
+    .movieC-bottom .movieCBot-left {
+        flex-direction: column;
+        gap: unset;
+        align-items: flex-start;
+    }
 }
 
 .movieC-bottom .movieCBot-left .movieCBot-left-days{

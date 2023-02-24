@@ -106,8 +106,11 @@ const MovieComponent = ({usr, id, title, desc, nOuser, dOpublic, nOlikes, nOHate
                 </div>
                 <div className="movieC-bottom">
                     <div className="movieCBot-left">
-                        <span>Posted by {nOuser}</span>
-                        {dateElement}
+                        <div className="movieCBot-left-txt">
+                        <span>Posted by </span>
+                        <span>{nOuser}</span>
+                        </div>
+                        <span>{dateElement}</span>
                     </div>
                     <div className="movieCBot-right">
                         <div className="movieCBot-right-left">
