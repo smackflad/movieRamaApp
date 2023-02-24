@@ -48,6 +48,42 @@
     user-select: none;
     opacity: 0.9;
 }
+
+.homePage-NavBar-bot .homePage-NavBar-bot-right .homePage-NavBar-bot-right-dropdown .homePage-NavBar-bot-right-dropdown-btn .homePage-NavBar-bot-right-dropdown-txt {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
+@media only screen and (max-width: 530px) {
+.homePage-NavBar-bot .homePage-NavBar-bot-right .homePage-NavBar-bot-right-dropdown .homePage-NavBar-bot-right-dropdown-btn .homePage-NavBar-bot-right-dropdown-txt {
+    flex-direction: column;
+    gap: unset;
+}
+.homePage-NavBar-bot .homePage-NavBar-bot-right .homePage-NavBar-bot-right-dropdown .homePage-NavBar-bot-right-dropdown-btn .homePage-NavBar-bot-right-dropdown-txt .homePage-NavBar-bot-right-dropdown-txt-top {
+    font-size: 12px;
+}
+.homePage-NavBar-bot .homePage-NavBar-bot-right .homePage-NavBar-bot-right-dropdown .homePage-NavBar-bot-right-dropdown-btn .homePage-NavBar-bot-right-dropdown-txt .homePage-NavBar-bot-right-dropdown-txt-bot {
+    margin-left: 15px;
+}
+.homePage-NavBar-bot .homePage-NavBar-bot-right .homePage-NavBar-bot-right-dropdown .homePage-NavBar-bot-right-dropdown-btn {
+    min-width: 89px;
+
+}
+}
+
+@media only screen and (max-width: 480px) {
+.homePage-NavBar-bot .homePage-NavBar-bot-left button{
+    padding: 4px 5px !important;
+}
+}
+
+@media only screen and (max-width: 460px) {
+    .homePage-NavBar-bot .homePage-NavBar-bot-left button{
+        font-size: 11px !important;
+    }
+}
+
 .homePage-NavBar-bot {
     display: flex;
     flex-direction: row;
@@ -67,6 +103,7 @@
     display: flex;
     flex-direction: row;
     gap: 5px;
+    align-items: center;
 }
 
 .homePage-NavBar-bot .homePage-NavBar-bot-left button{
@@ -77,6 +114,7 @@
     color: #3b3b3b;
     font-weight: 600;
     font-size: 14px;
+    height: max-content;
 }
 
 .homePage-NavBar-bot .homePage-NavBar-bot-left button:hover{

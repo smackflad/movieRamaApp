@@ -208,7 +208,8 @@ return (
               <div className="homePage-NavBar-bot-right-dropdown">
                   <div ref={refDropdownbtn} className="homePage-NavBar-bot-right-dropdown-btn" onClick={()=>{setDropdownIsOpen(!dropdownIsOpen)}}>
                       <div className="homePage-NavBar-bot-right-dropdown-txt">
-                          Sort by: {orderTxt}
+                        <span className="homePage-NavBar-bot-right-dropdown-txt-top">Sort by: </span>
+                        <span className="homePage-NavBar-bot-right-dropdown-txt-bot">{orderTxt}</span>
                       </div>
                       <span className="material-symbols-rounded">
                           expand_more

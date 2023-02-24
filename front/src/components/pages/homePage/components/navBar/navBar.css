@@ -16,7 +16,17 @@
     max-width: 250px;
     min-width: 200px;
     height: auto;
+    content: url("../../../../../imgs/logoflat.png");
 }
+
+@media only screen and (max-width: 655px) {
+    .NavBar-external .NavBar-internal .NavBar-top .NavBar-top-left img {
+        content: url("../../../../../imgs/logoc.png");
+        max-width: 78px;
+        min-width: 78px;
+    }
+}
+
 
 .NavBar-external .NavBar-internal .NavBar-top .NavBar-top-left img:hover {
     cursor: pointer;
@@ -44,8 +54,15 @@
     display: flex;
     flex-direction: column;
     position: relative;
+    
 }
-
+.NavBar-external .NavBar-internal .NavBar-top .NavBar-top-right .NavBar-top-right-dropdown .NavBar-top-right-dropdown-btn .NavBar-top-right-dropdown-txt{
+    width: max-content;
+}
+.NavBar-external .NavBar-internal .NavBar-top .NavBar-top-right .NavBar-top-right-dropdown .NavBar-top-right-dropdown-btn .NavBar-top-right-dropdown-txt::before{
+    content: "Welcome back,";
+    width: max-content;
+}
 .NavBar-external .NavBar-internal .NavBar-top .NavBar-top-right .NavBar-top-right-dropdown .NavBar-top-right-dropdown-btn{
     display: flex;
     flex-direction: row;
