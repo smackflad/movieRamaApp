@@ -18,7 +18,7 @@ services:
       context: ./mr-back
     restart: always
     ports:
-      - "3001:3000"
+      - "3001:3001"
     depends_on:
       - db
     environment:
@@ -35,7 +35,7 @@ services:
     depends_on:
       - backend
     environment:
-      REACT_APP_BACKEND_URL: http://backend:3001
+      REACT_APP_BACKEND_URL: http://localhost:3001
 
 volumes:
   db-data:
