@@ -28,7 +28,7 @@ const NewMoviePage = () => {
     const token= localStorage.getItem('accessToken');
     if(token){
       axios.defaults.headers.common = {'Authorization': `Bearer ${token}`}
-      axios.get(`http://localhost:3001/users/validate`)
+      axios.get(`${process.env.REACT_APP_BACKEND_URL}/users/validate`)
       .then(res => {
         setUsr(res.data);
         setIsLoading(false);
@@ -49,7 +49,7 @@ const NewMoviePage = () => {
     const token= localStorage.getItem('accessToken');
     if(token){
       axios.defaults.headers.common = {'Authorization': `Bearer ${token}`}
-      await axios.post(`http://localhost:3001/movies/create`, {
+      await axios.post(`${process.env.REACT_APP_BACKEND_URL}/movies/create`, {
         title: e.target.title.value,
         description: e.target.desc.value,
       })

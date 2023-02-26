@@ -41,7 +41,7 @@ const ProfilePage = () => {
     const token= localStorage.getItem('accessToken');
     if(token){
       axios.defaults.headers.common = {'Authorization': `Bearer ${token}`}
-      axios.get(`http://localhost:3001/users/validate`)
+      axios.get(`${process.env.REACT_APP_BACKEND_URL}/users/validate`)
       .then(res => {
         setUsr(res.data);
         setEmail(res.data.email)
@@ -65,7 +65,7 @@ const ProfilePage = () => {
     const token= localStorage.getItem('accessToken');
     if(token){
       axios.defaults.headers.common = {'Authorization': `Bearer ${token}`}
-      await axios.post(`http://localhost:3001/users/update`, {
+      await axios.post(`${process.env.REACT_APP_BACKEND_URL}/users/update`, {
         firstName: firstName,
         lastName: lastName
       })
@@ -86,7 +86,7 @@ const ProfilePage = () => {
     const token= localStorage.getItem('accessToken');
     if(token){
       axios.defaults.headers.common = {'Authorization': `Bearer ${token}`}
-      await axios.post(`http://localhost:3001/users/updatePassword`, {
+      await axios.post(`${process.env.REACT_APP_BACKEND_URL}/users/updatePassword`, {
         password: oldPasswd,
         newPassword: newPasswd
       })

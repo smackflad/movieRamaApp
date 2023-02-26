@@ -43,7 +43,7 @@ const LoginPage = () => {
     e.preventDefault();
     setEmailDisabled(true);
     setIsLoading(true);
-    await axios.post(`http://localhost:3001/users/exists`, {
+    await axios.post(`${process.env.REACT_APP_BACKEND_URL}/users/exists`, {
       email: email
     })
       .then(res => {
@@ -67,7 +67,7 @@ const LoginPage = () => {
   const handleLogin = async (e)=>{
     e.preventDefault();
     setIsLoading(true);
-    await axios.post(`http://localhost:3001/users/login`, {
+    await axios.post(`${process.env.REACT_APP_BACKEND_URL}/users/login`, {
       email: email,
       password: e.target.password.value
     })
@@ -96,7 +96,7 @@ const LoginPage = () => {
 
     }else{
       setIsLoading(true);
-      await axios.post(`http://localhost:3001/users/create`, {
+      await axios.post(`${process.env.REACT_APP_BACKEND_URL}/users/create`, {
           email: email,
           username: "test",
           firstName: e.target.firstName.value,

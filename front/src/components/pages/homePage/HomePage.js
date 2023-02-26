@@ -57,7 +57,7 @@ const HomePage = () => {
     const token= localStorage.getItem('accessToken');
     if(token){
       axios.defaults.headers.common = {'Authorization': `Bearer ${token}`}
-      axios.get(`http://localhost:3001/users/validate`)
+      axios.get(`${process.env.REACT_APP_BACKEND_URL}/users/validate`)
       .then(res => {
         setUsr(res.data);
         setLoggedIn(true);
@@ -80,7 +80,7 @@ const HomePage = () => {
       const token= localStorage.getItem('accessToken');
       if(token){
         axios.defaults.headers.common = {'Authorization': `Bearer ${token}`}
-        axios.get(`http://localhost:3001/movies/`+by+`/0/`+m)
+        axios.get(`${process.env.REACT_APP_BACKEND_URL}/movies/`+by+`/0/`+m)
         .then(res => {
           setMoviesArrayTemp(res.data)
           // setUsr(res.data);
@@ -103,7 +103,7 @@ const HomePage = () => {
     }else{
       setIsLoading(true);
       axios.defaults.headers.common = {}
-      axios.get(`http://localhost:3001/movies/`+by+`/0`)
+      axios.get(`${process.env.REACT_APP_BACKEND_URL}/movies/`+by+`/0`)
       .then(res => {
         setMoviesArrayTemp(res.data)
         // setUsr(res.data);

@@ -17,7 +17,7 @@ const MovieComponent = ({usr, id, title, desc, nOuser, dOpublic, nOlikes, nOHate
         const token= localStorage.getItem('accessToken');
         if(token){
             axios.defaults.headers.common = {'Authorization': `Bearer ${token}`}
-            axios.patch(`http://localhost:3001/movies/react/${id}`, {
+            axios.patch(`${process.env.REACT_APP_BACKEND_URL}/movies/react/${id}`, {
                 reaction: reaction
             })
             .catch(error => {

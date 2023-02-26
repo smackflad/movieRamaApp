@@ -1,9 +1,41 @@
-version: "1"
+version: '3.8'
+
 services:
-  reactui:
-    build: ./front
-    container_name: reactui_c
+  db:
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_USER: admin@admin.com
+      POSTGRES_PASSWORD: 187561
+      POSTGRES_DB: postgres
     ports:
-      - '3000:3000'
-    stdin_open: true
-    tty: true
+      - "5432:5432"
+    volumes:
+      - ./db-data:/var/lib/postgresql/data
+  
+  backend:
+    build:
+      context: ./mr-back
+    restart: always
+    ports:
+      - "3001:3000"
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_USERNAME: admin@admin.com
+      DB_PASSWORD: 187561
+      DB_NAME: postgres
+
+  frontend:
+    build: ./front
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    environment:
+      REACT_APP_BACKEND_URL: http://backend:3001
+
+volumes:
+  db-data:
