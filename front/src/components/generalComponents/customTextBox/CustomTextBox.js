@@ -1,6 +1,5 @@
 import "./customTextBox.css";
-import { useNavigate } from "react-router-dom";
-import { useAnimation, motion, delay, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 const CustomTextBox = ({keyy="", name="", disabled=false, isError=false, errorMessage="", required=false, value, change=()=>{}, blur=()=>{}, placeholder="", type="text"}) => {
     return (

@@ -1,6 +1,5 @@
 import "./customTextBox.css";
-import { useNavigate } from "react-router-dom";
-import { useAnimation, motion, delay, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 const CustomTextBox = ({keyy="", name="", disabled=false, isError=false, errorMessage="", required=false, value, change=()=>{}, blur=()=>{}, placeholder="", type="text"}) => {
     return (
@@ -13,12 +12,6 @@ const CustomTextBox = ({keyy="", name="", disabled=false, isError=false, errorMe
             disabled={disabled}
             value={value} onChange={change}
             onBlur={blur}
-
-            // initial={{ y: 100, opacity:0}}
-            // animate={{ y: 0, opacity:1}}
-            // transition={{
-            //     delay: 0.2
-            // }}
         />
         {(isError) &&
             <span className="customTextBox-span">*{errorMessage}</span>

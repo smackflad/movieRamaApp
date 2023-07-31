@@ -1,7 +1,6 @@
 import "./popupMessage.css";
-import { useNavigate } from "react-router-dom";
-import { useAnimation, motion, delay, AnimatePresence, useMotionValue, useTransform } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import { motion, useMotionValue, useTransform } from "framer-motion";
+import { useEffect, useState } from "react";
 
 const PopupMessage = ({message, onTimeout}) => {
     const [visible, setVisible] = useState(true);
@@ -71,7 +70,6 @@ const PopupMessage = ({message, onTimeout}) => {
   };
 
   const progressWidth = useMotionValue(0);
-  const progressTransform = useTransform(progressWidth, [0, 1], ["0%", "100%"]);
 
   useEffect(() => {
     if (paused) {

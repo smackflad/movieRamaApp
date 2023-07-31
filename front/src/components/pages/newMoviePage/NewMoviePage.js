@@ -1,22 +1,19 @@
 import "./newMoviePage.css";
-import mainLogo from "./../../../imgs/logoc.png";
 import NavBar from "../homePage/components/navBar/NavBar";
 import loading from "./../../../imgs/loading.svg";
 
-import { useContext, useEffect, useRef } from "react";
+import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import 'animate.css';
-import { useAnimation, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import axios from 'axios';
 import AppContext from "../../../AppContext";
 
 const NewMoviePage = () => {
   const { handleButtonClick } = useContext(AppContext);
 
-  let navigate = useNavigate();  
-
-  // const accessToken = localStorage.getItem('accessToken');
+  let navigate = useNavigate();
 
   
   const [usr, setUsr] = useState({});
@@ -77,7 +74,7 @@ const NewMoviePage = () => {
       <motion.div className="newMoviePage-logo"
         initial={{ scale: 1 }}
       >
-        <img className="newMoviePage-logo-loading" src={loading} />
+        <img className="newMoviePage-logo-loading" src={loading} alt="Loading"/>
       </motion.div>
     </div>
   </>)

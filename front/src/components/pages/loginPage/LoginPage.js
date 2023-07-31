@@ -3,11 +3,10 @@ import mainLogo from "./../../../imgs/logoflat.png";
 import mainLogoC from "./../../../imgs/logoc.png";
 import loading from "./../../../imgs/loading.svg";
 
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { useAnimation, motion, delay, AnimatePresence } from "framer-motion";
-import { useInView } from "react-intersection-observer";
+import { motion, AnimatePresence } from "framer-motion";
 import axios from 'axios';
 import CustomTextBox from "../../generalComponents/customTextBox/CustomTextBox";
 import AppContext from "../../../AppContext";
@@ -26,18 +25,6 @@ const LoginPage = () => {
   const [regPasswd, setRegPasswd] = useState("");
   const [regRepPasswd, setRegRepPasswd] = useState("");
   const [regPasswdErr, setRegPasswdErr] = useState(false);
-
-
-  const initLogo = {
-    show: {
-    //   opacity: 1,
-        y: 0,
-        transition: { type: "spring", stiffness: 300, damping: 24 }
-    },
-    hidden: { opacity: 0, y: -60, transition: { duration: 0.2 } }
-  
-      
-  };
 
   const handleSubmit = async (e)=>{
     e.preventDefault();
@@ -141,7 +128,7 @@ return (
               animate={{ y: 0, scale: 1, opacity:1}}
               exit={{ y: 100, scale: 0, opacity:0 }}
               >
-              <img src={mainLogo} />
+              <img src={mainLogo} alt="Loading"/>
             </motion.div>
           </>
         ):(
@@ -154,7 +141,7 @@ return (
               // delay: 0.2
             }}
               >
-            <img src={mainLogoC} />
+            <img src={mainLogoC} alt="Logo"/>
           </motion.div>        
         )}
         </AnimatePresence>
@@ -214,7 +201,7 @@ return (
                   </>
                 ):(
                   <>
-                    <img src={loading} />
+                    <img src={loading} alt="Loading"/>
                   </>
                 )
               }
@@ -254,7 +241,7 @@ return (
                   </>
                 ):(
                   <>
-                    <img src={loading} />
+                    <img src={loading} alt="Loading"/>
                   </>
                 )
               }
@@ -308,7 +295,7 @@ return (
               <CustomTextBox 
               keyy="regRepPass"
               name="repPass"
-              disabled={!regPasswd}
+              disabled={(regPasswd.length < 8)}
               required={true}
               isError={regPasswdErr}
               value={regRepPasswd}
@@ -338,7 +325,7 @@ return (
                 </>
               ):(
                 <>
-                  <img src={loading} />
+                  <img src={loading} alt="Loading"/>
                 </>
               )
               }

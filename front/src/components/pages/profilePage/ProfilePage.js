@@ -1,13 +1,12 @@
 import "./profilePage.css";
-import mainLogo from "./../../../imgs/logoc.png";
 import NavBar from "../homePage/components/navBar/NavBar";
 import loading from "./../../../imgs/loading.svg";
 
-import { useContext, useEffect, useRef } from "react";
+import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import 'animate.css';
-import { useAnimation, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import axios from 'axios';
 import CustomTextBox from "./customTextBox/CustomTextBox";
 import AppContext from "../../../AppContext";
@@ -23,10 +22,8 @@ const ProfilePage = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const [email, setEmail] = useState("");
-  const [emailDisabled, setEmailDisabled] = useState(false);
 
   const [oldPasswd, setOldPasswd] = useState("");
-  const [passwd, setPasswd] = useState("");
   const [newPasswd, setNewPasswd] = useState("");
   const [repPasswd, setRepPasswd] = useState("");
 
@@ -116,7 +113,7 @@ const ProfilePage = () => {
       <motion.div className="profilePage-logo"
         initial={{ scale: 1 }}
       >
-        <img className="profilePage-logo-loading" src={loading} />
+        <img className="profilePage-logo-loading" src={loading} alt="Loading"/>
       </motion.div>
     </div>
   </>)

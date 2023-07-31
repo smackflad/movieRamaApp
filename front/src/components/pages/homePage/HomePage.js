@@ -8,8 +8,7 @@ import { useContext, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import 'animate.css';
-import { useAnimation, motion, delay } from "framer-motion";
-import { useInView } from "react-intersection-observer";
+import { useAnimation, motion } from "framer-motion";
 import axios from 'axios';
 import AppContext from '../../../AppContext';
 
@@ -24,7 +23,6 @@ const HomePage = () => {
 
   const [by, setBy] = useState(0);
   const [m, setM] = useState(0);
-  const [order, setOrder] = useState(0);
   const [orderTxt, setOrderTxt] = useState("Date");
 
   const [dropdownIsOpen, setDropdownIsOpen] = useState(false);
@@ -53,6 +51,7 @@ const HomePage = () => {
 
 
   useEffect(()=>{
+    
     setIsLoading(true);
     const token= localStorage.getItem('accessToken');
     if(token){
@@ -182,9 +181,9 @@ return (
       initial={{ scale: 1 }}
       animate={animationControls}
     >
-      <img src={mainLogo} />
+      <img src={mainLogo} alt="Logo"/>
       {isLoading &&
-        <img className="homePage-logo-loading" src={loading} />
+        <img className="homePage-logo-loading" src={loading} alt="Loading"/>
       }
     </motion.div>
     <motion.div
@@ -229,7 +228,7 @@ return (
         </motion.div>
         {(isLoading || !seq) ? (
           <div className="homePage-posts-loading">
-            <img className="homePage-logo-loading" src={loading} />
+            <img className="homePage-logo-loading" src={loading} alt="Loading"/>
           </div>
         ): (
           <motion.div className="homePage-posts">

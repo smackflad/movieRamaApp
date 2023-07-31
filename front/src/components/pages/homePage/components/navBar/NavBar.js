@@ -2,10 +2,6 @@ import "./navBar.css";
 import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { useAnimation, motion, delay, AnimatePresence } from "framer-motion";
-import axios from "axios";
-import mainLogo from "../../../../../imgs/logoflat.png";
-
 
 const NavBar = ({usr}) => {
 const [loggedIn, setLoggedIn] = useState(false);
@@ -41,7 +37,7 @@ const refDropdown = useRef(null);
         <div className="NavBar-internal">
             <div className="NavBar-top">
                 <div className="NavBar-top-left">
-                    <img onClick={()=>{navigate('/')}} />
+                    <img onClick={()=>{navigate('/')}} alt="Logo"/>
                 </div>
                 <div className="NavBar-top-right">
                     {!(loggedIn) ?(
